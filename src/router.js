@@ -15,12 +15,12 @@ import ErrorPage from './ErrorPage'
 const routes = [
   ...pages,
  
-/*  {
+  {
     path: '/admin',
     children: () => import('./admin'),
   },
 
-  {
+ /* {
     path: '/developer',
     children: () => import('./developer'),
   },*/

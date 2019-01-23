@@ -13,7 +13,7 @@ export default [
       }
     `,*/
     render: ([TestPage], data, context) => ({ 
-      title: 'Tuan Rumah',
+      title: 'Starter App',
       component: (
         <TestPage/>
       ),
