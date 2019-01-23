@@ -7,6 +7,10 @@ export default createMuiTheme({
 /*  palette: {
     primary: indigo,
   },*/
+  typography: {
+    useNextVariants: true,
+  },
+  
   overrides: {
     MuiButton: {
       raisedPrimary: {

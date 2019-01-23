@@ -4,7 +4,7 @@ class TestPage extends Component {
   render() {
     return (
       <div>
-        TestPage
+        React is awesome
       </div>
     )
   }

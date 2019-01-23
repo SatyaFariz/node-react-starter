@@ -11,7 +11,7 @@ import AppRenderer from './AppRenderer'
 
 type Props = {
   history: any,
-  createRelay: () => any,
+  createRelay: () => any
 }
 
 class App extends React.Component<Props> {
@@ -24,7 +24,7 @@ class App extends React.Component<Props> {
     query: null,
     variables: null,
     render: () => <AppRenderer ref={this.rendererRef} />,
-    relay: this.props.createRelay(),
+    relay: this.props.createRelay()
   }
 
   childContext = {
@@ -35,7 +35,7 @@ class App extends React.Component<Props> {
       return new Promise(resolve => {
         this.onRenderComplete = resolve
       })
-    },
+    }
   }
 
   rendererRef = React.createRef()
@@ -60,7 +60,7 @@ class App extends React.Component<Props> {
       .resolve({
         query: queryString.parse(location.search),
         pathname: location.pathname,
-        fetchQuery: this.fetchQuery,
+        fetchQuery: this.fetchQuery
       })
       .then(route => {
         if (route.redirect) {
@@ -85,7 +85,7 @@ class App extends React.Component<Props> {
             resolve(props)
           }
           return <AppRenderer ref={this.rendererRef}/>
-        },
+        }
       })
     })
   }

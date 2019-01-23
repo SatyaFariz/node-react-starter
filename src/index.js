@@ -9,6 +9,6 @@ import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
   <App history={createHistory()} createRelay={createRelay} />,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 registerServiceWorker()
