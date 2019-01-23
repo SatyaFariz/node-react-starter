@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "7.1.6",
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
-    "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
     "apollo-server-express": "^1.4.0",
     "babel-core": "7.0.0-bridge.0",
@@ -42,6 +42,7 @@
     "graphql-playground-middleware-express": "^1.7.8",
     "graphql-relay": "^0.6.0",
     "graphql-subscriptions": "^1.0.0",
+    "history": "^4.7.2",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
@@ -70,6 +71,7 @@
     "style-loader": "0.23.0",
     "subscriptions-transport-ws": "^0.9.15",
     "terser-webpack-plugin": "1.1.0",
+    "universal-router": "^8.0.0",
     "url-loader": "1.1.1",
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.14",
@@ -82,6 +84,10 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
+  },
+  "proxy": "http://localhost:4000",
+  "engines": {
+    "node": "v8.11.3"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -131,11 +137,6 @@
       "web.jsx",
       "jsx",
       "node"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
     ]
   },
   "devDependencies": {
