@@ -31,7 +31,7 @@ mongoose.connect(
   { useMongoClient: true }
 )
 
-redisConfig.host = 'localhost',
+redisConfig.host = 'localhost'
 redisConfig.port = 6379
 
 const redisClient = redis.createClient(redisConfig)
@@ -93,7 +93,7 @@ ws.listen(port, () => {
           const { session } = webSocket.upgradeReq
           
           const context = {
-            pubsub,
+      //      pubsub,
             session
           }
 
