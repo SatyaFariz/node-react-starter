@@ -27,7 +27,7 @@ let redisConfig = {}
 
 // local mongoDB
 mongoose.connect(
-  'mongodb://localhost:27017/starterapp', 
+  process.env.DB_URI, 
   { useMongoClient: true }
 )
 
