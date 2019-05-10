@@ -9,6 +9,9 @@ const SignInInput = require('../model/input/SignInInput')
 const ActionInfo = require('../model/payload/ActionInfo')
 const signIn = require('../utils/mutation-resolvers/signIn')
 
+const UserTypeEnum = require('../model/UserTypeEnum')
+const signOut = require('../utils/mutation-resolvers/signOut')
+
 module.exports = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
@@ -23,6 +26,14 @@ module.exports = new GraphQLObjectType({
         input: { type: new GraphQLNonNull(SignInInput) }
       },
       resolve: signIn
+    },
+
+    signOut: {
+      type: ActionInfo,
+      args: {
+        userType: { type: new GraphQLNonNull(UserTypeEnum) }
+      },
+      resolve: signOut
     }
   })
 })
