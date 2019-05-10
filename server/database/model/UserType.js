@@ -5,8 +5,8 @@ module.exports = new Schema({
   name: {
     type: String,
     required: true,
-    enum: ['Admin', 'Developer', 'Regular User'],
-    default: 'Regular User'
+    enum: ['ADMIN', 'REGULAR_USER'],
+    default: 'REGULAR_USER'
   },
 
   roles: {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const UserGroup = require('./UserGroup')
+const UserType = require('./UserType')
 const Image = require('./Image')
 const ResetPassword = require('./ResetPassword')
 
@@ -30,8 +30,8 @@ const User = new mongoose.Schema({
     required: true,
   },
 
-  userGroup: {
-    type: UserGroup,
+  userType: {
+    type: UserType,
     required: true,
     default: {}
   },
