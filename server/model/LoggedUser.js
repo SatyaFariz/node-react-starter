@@ -1,5 +1,6 @@
 const {
   GraphQLObjectType,
+  GraphQLID,
   GraphQLString
 } = require('graphql')
 
@@ -9,7 +10,7 @@ module.exports = new GraphQLObjectType({
   name: 'LoggedUser',
   fields: () => ({
     id: {
-      type: GraphQLString,
+      type: GraphQLID,
       resolve: () => 'loggedUser'
     },
 
