@@ -30,13 +30,13 @@ const User = new mongoose.Schema({
     required: true,
   },
 
-  userType: {
+  user_type: {
     type: UserType,
     required: true,
     default: {}
   },
 
-  resetPassword: {
+  reset_password: {
     type: ResetPassword
   },
 

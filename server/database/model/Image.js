@@ -7,12 +7,12 @@ module.exports = new Schema({
     required: true,
   },
 
-  URL: {
+  url: {
     type: String,
     required: true,
   },
 
-  secureURL: {
+  secure_url: {
     type: String,
     required: true
   },
@@ -31,15 +31,15 @@ module.exports = new Schema({
     type: String
   },
 
-  is360: {
+  is_spherical: {
     type: Boolean
   },
 
-  URL360: {
+  spherical_url: {
     type: String
   },
 
-  secureURL360: {
+  spherical_secure_url: {
     type: String
   }
 })
