@@ -1,7 +1,6 @@
 const {
   GraphQLObjectType,
-  GraphQLID,
-  GraphQLString
+  GraphQLID
 } = require('graphql')
 
 const User = require('./User')
