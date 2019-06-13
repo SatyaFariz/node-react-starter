@@ -9,7 +9,7 @@ const UserTypeEnum = require('../UserTypeEnum')
 module.exports = new GraphQLInputObjectType({
   name: 'SignInInput',
   fields: () => ({
-    usernameOrEmail: {
+    username_or_email: {
       type: new GraphQLNonNull(GraphQLString)
     },
 
@@ -17,7 +17,7 @@ module.exports = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString)
     },
 
-    userType: {
+    user_type: {
       type: new GraphQLNonNull(UserTypeEnum)
     }
   })
