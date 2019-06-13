@@ -10,10 +10,24 @@ module.exports = new GraphQLObjectType({
       type: GraphQLString,
       resolve: root => root._id.toString()
     },
+
     name: {
       type: GraphQLString
     },
+
+    username: {
+      type: GraphQLString
+    },
+
     email: {
+      type: GraphQLString
+    },
+
+    phone: {
+      type: GraphQLString
+    },
+
+    address: {
       type: GraphQLString
     }
   })
