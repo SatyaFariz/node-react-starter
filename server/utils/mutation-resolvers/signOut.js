@@ -1,5 +1,5 @@
-module.exports = (root, { userType }, { session }) => {
-  if(userType === 'ADMIN')
+module.exports = (root, { user_type }, { session }) => {
+  if(user_type === 'ADMIN')
     session.admin = null
   else
     session.user = null

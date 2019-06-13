@@ -20,7 +20,7 @@ module.exports = new GraphQLObjectType({
       resolve: () => UserMutation
     },
 
-    signIn: {
+    sign_in: {
       type: ActionInfo,
       args: {
         input: { type: new GraphQLNonNull(SignInInput) }
@@ -28,7 +28,7 @@ module.exports = new GraphQLObjectType({
       resolve: signIn
     },
 
-    signOut: {
+    sign_out: {
       type: ActionInfo,
       args: {
         userType: { type: new GraphQLNonNull(UserTypeEnum) }

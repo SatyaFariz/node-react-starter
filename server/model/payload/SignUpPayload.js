@@ -8,10 +8,10 @@ const ActionInfo = require('./ActionInfo')
 module.exports = new GraphQLObjectType({
   name: 'SignUpPayload',
   fields: () => ({
-    userID: {
+    user_id: {
       type: GraphQLString
     },
-    actionInfo: {
+    action_info: {
       type: ActionInfo
     }
   })
