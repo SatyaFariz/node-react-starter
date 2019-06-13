@@ -10,6 +10,7 @@ const SignUpPayload = require('../model/payload/SignUpPayload')
 const userSignUp = require('../utils/mutation-resolvers/userSignUp')
 const userNameUpdate = require('../utils/mutation-resolvers/userNameUpdate')
 const userPhoneUpdate = require('../utils/mutation-resolvers/userPhoneUpdate')
+const userAddressUpdate = require('../utils/mutation-resolvers/userAddressUpdate')
 
 module.exports = new GraphQLObjectType({
   name: 'UserMutation',
@@ -36,6 +37,14 @@ module.exports = new GraphQLObjectType({
         phone: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: userPhoneUpdate
+    },
+
+    address_update: {
+      type: User,
+      args: {
+        address: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: userAddressUpdate
     }
   })
 })
