@@ -3,8 +3,11 @@ const {
   GraphQLString,
   GraphQLFloat,
   GraphQLInt,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLList
 } = require('graphql')
+
+const Image = require('./Image')
 
 module.exports = new GraphQLObjectType({
   name: 'Tour',
@@ -73,5 +76,33 @@ module.exports = new GraphQLObjectType({
     location_details: {
       type: GraphQLString
     },
+
+    highlights: {
+      type: new GraphQLList(GraphQLString)
+    },
+
+    terms_and_conditions: {
+      type: new GraphQLList(GraphQLString)
+    },
+
+    cancellation_policy: {
+      type: new GraphQLList(GraphQLString)
+    },
+
+    guest_requirements: {
+      type: new GraphQLList(GraphQLString)
+    },    
+
+    more_tips: {
+      type: new GraphQLList(GraphQLString)
+    },
+
+    itinerary: {
+      type: new GraphQLList(new GraphQLList(GraphQLString))
+    },
+
+    photos: {
+      type: new GraphQLList(Image)
+    }
   })
 })
