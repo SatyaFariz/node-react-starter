@@ -30,7 +30,7 @@ module.exports = ({ username }, user) => {
         }
       }
 
-      resolve({ action_info, data: user })
+      resolve({ action_info, user_data: user })
     })
   })
 }
