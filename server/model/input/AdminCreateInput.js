@@ -4,7 +4,7 @@ const {
   GraphQLString,
 } = require('graphql')
 
-const { Username } = require('../scalars/Username')
+const { Username } = require('../../scalars/Username')
 
 module.exports = new GraphQLInputObjectType({
   name: 'AdminCreateInput',
