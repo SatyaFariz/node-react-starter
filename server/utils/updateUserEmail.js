@@ -26,7 +26,7 @@ module.exports = ({ email }, user) => {
        //   pubsub.publish('USER_DATA_CHANGED', { userDataChanged: user })
         } else {
           action_info.success = false
-          action_info.message = 'Terjadi kesalahan.'
+          action_info.message = email === user.email ? 'Tidak dapat mengubah dengan email yang sama.' : 'Terjadi kesalahan.'
         }
       }
 
