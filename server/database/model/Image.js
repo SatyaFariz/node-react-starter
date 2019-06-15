@@ -2,7 +2,7 @@ const { Schema } = require('mongoose')
 
 module.exports = new Schema({
 
-  filename: {
+  public_id: {
     type: String,
     required: true,
   },
