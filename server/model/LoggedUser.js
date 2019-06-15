@@ -13,7 +13,7 @@ module.exports = new GraphQLObjectType({
       resolve: () => 'loggedUser'
     },
 
-    me: {
+    user_data: {
       type: User,
       resolve: root => root
     }
