@@ -5,8 +5,8 @@ module.exports = async (root, { input }, { session }) => {
   input.password = await hashPassword(input.password.trim())
  
   const newUser = new User({
-    userGroup: {
-      name: 'Regular User'
+    user_type: {
+      name: 'REGULAR_USER'
     },
     ...input
   })
