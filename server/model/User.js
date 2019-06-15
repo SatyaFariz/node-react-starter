@@ -27,6 +27,10 @@ module.exports = new GraphQLObjectType({
       type: GraphQLString
     },
 
+    whatsapp: {
+      type: GraphQLString
+    },
+
     address: {
       type: GraphQLString
     }

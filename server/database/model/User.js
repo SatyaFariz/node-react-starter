@@ -54,6 +54,11 @@ const User = new mongoose.Schema({
     trim: true
   },
 
+  whatsapp: {
+    type: String,
+    trim: true
+  },
+
   province: {
     type: String,
     trim: true
