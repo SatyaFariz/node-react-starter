@@ -10,6 +10,7 @@ const AdminCreateInput = require('../model/input/AdminCreateInput')
 const adminNameUpdate = require('../utils/mutation-resolvers/adminNameUpdate')
 const adminCreate = require('../utils/mutation-resolvers/adminCreate')
 const adminWhatsappUpdate = require('../utils/mutation-resolvers/adminWhatsappUpdate')
+const adminAddressUpdate = require('../utils/mutation-resolvers/adminAddressUpdate')
 
 module.exports = new GraphQLObjectType({
   name: 'AdminMutation',
@@ -36,6 +37,14 @@ module.exports = new GraphQLObjectType({
         whatsapp: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: adminWhatsappUpdate
+    },
+
+    address_update: {
+      type: User,
+      args: {
+        address: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: adminAddressUpdate
     }
   })
 })
