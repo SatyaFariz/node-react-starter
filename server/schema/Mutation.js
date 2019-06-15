@@ -4,6 +4,7 @@ const {
 } = require('graphql')
 
 const UserMutation = require('../mutations/UserMutation')
+const AdminMutation = require('../mutations/AdminMutation')
 
 const SignInInput = require('../model/input/SignInInput')
 const ActionInfo = require('../model/payload/ActionInfo')
@@ -18,6 +19,11 @@ module.exports = new GraphQLObjectType({
     user: {
       type: UserMutation,
       resolve: () => UserMutation
+    },
+
+    admin: {
+      type: AdminMutation,
+      resolve: () => AdminMutation
     },
 
     sign_in: {
