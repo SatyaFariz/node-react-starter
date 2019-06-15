@@ -32,7 +32,8 @@ module.exports = new Schema({
   },
 
   is_spherical: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
 
   spherical_url: {
