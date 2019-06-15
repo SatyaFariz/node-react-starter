@@ -1,8 +1,9 @@
 const { Schema } = require('mongoose')
+const mongoose = require('mongoose')
 
 const Image = require('./Image')
 
-module.exports = new Schema({
+const Tour = new Schema({
   province: {
     type: String,
     required: true
@@ -126,7 +127,7 @@ module.exports = new Schema({
     type: [String],
     required: true,
     default: []
-  }
+  },
 
   itinerary: {
     type: [[String]]
@@ -143,4 +144,6 @@ module.exports = new Schema({
     required: true,
     default: []
   }
-})
+}, { timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' })
+
+module.exports = mongoose.model('tour', Tour, 'tour')

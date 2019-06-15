@@ -1,6 +1,7 @@
 const {
   GraphQLInt,
   GraphQLFloat,
+  GraphQLBoolean,
   GraphQLString,
   GraphQLNonNull,
   GraphQLInputObjectType

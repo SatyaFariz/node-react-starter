@@ -4,6 +4,8 @@ const {
   GraphQLString
 } = require('graphql')
 
+const AdminTourMutation = require('./AdminTourMutation')
+
 const { GraphQLEmail } = require('graphql-custom-types')
 
 const { Username } = require('../scalars/Username')
@@ -78,6 +80,8 @@ module.exports = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(Username) }
       },
       resolve: adminUsernameUpdate
-    }
+    }, 
+
+    ...AdminTourMutation
   })
 })
