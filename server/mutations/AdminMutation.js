@@ -15,6 +15,7 @@ const adminCreate = require('../utils/mutation-resolvers/adminCreate')
 const adminWhatsappUpdate = require('../utils/mutation-resolvers/adminWhatsappUpdate')
 const adminAddressUpdate = require('../utils/mutation-resolvers/adminAddressUpdate')
 const adminEmailUpdate = require('../utils/mutation-resolvers/adminEmailUpdate')
+const adminPasswordUpdate = require('../utils/mutation-resolvers/adminPasswordUpdate')
 
 module.exports = new GraphQLObjectType({
   name: 'AdminMutation',
@@ -57,6 +58,15 @@ module.exports = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLEmail) }
       },
       resolve: adminEmailUpdate
+    },
+    
+    password_update: {
+      type: ActionInfo,
+      args: {
+        current_password: { type: new GraphQLNonNull(GraphQLString) },
+        new_password: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: adminPasswordUpdate
     }
   })
 })
