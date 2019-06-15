@@ -28,6 +28,34 @@ module.exports = new Schema({
     required: true,
   },
 
+  kid_price: {
+    type: new Schema({
+      price_per_person: {
+        type: Number,
+        required: true
+      },
+
+      age_description: {
+        type: String,
+        required: true
+      }
+    })
+  },
+
+  package_price: {
+    type: new Schema({
+      price: {
+        type: Number,
+        required: true
+      },
+
+      number_of_people: {
+        type: Number,
+        required: true
+      }
+    })
+  },
+
   description: {
     type: String,
     required: true
