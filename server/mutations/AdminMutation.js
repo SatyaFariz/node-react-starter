@@ -4,16 +4,19 @@ const {
   GraphQLString
 } = require('graphql')
 
+const User = require('../model/User')
+const adminNameUpdate = require('../utils/mutation-resolvers/adminNameUpdate')
+
 
 module.exports = new GraphQLObjectType({
   name: 'AdminMutation',
   fields: () => ({
-    print_text: {
-      type: GraphQLString,
+    name_update: {
+      type: User,
       args: {
-        text: { type: new GraphQLNonNull(GraphQLString) }
+        name: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve: (root, { text }) => text
+      resolve: adminNameUpdate
     },
   })
 })
