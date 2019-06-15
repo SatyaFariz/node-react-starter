@@ -7,10 +7,12 @@ const {
 const User = require('../model/User')
 const UserInput = require('../model/input/UserInput')
 const SignUpPayload = require('../model/payload/SignUpPayload')
+const ActionInfo = require('../model/payload/ActionInfo')
 const userSignUp = require('../utils/mutation-resolvers/userSignUp')
 const userNameUpdate = require('../utils/mutation-resolvers/userNameUpdate')
 const userPhoneUpdate = require('../utils/mutation-resolvers/userPhoneUpdate')
 const userAddressUpdate = require('../utils/mutation-resolvers/userAddressUpdate')
+const userPasswordUpdate = require('../utils/mutation-resolvers/userPasswordUpdate')
 
 module.exports = new GraphQLObjectType({
   name: 'UserMutation',
@@ -45,6 +47,15 @@ module.exports = new GraphQLObjectType({
         address: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: userAddressUpdate
+    },
+
+    password_update: {
+      type: ActionInfo,
+      args: {
+        current_password: { type: new GraphQLNonNull(GraphQLString) },
+        new_password: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: userPasswordUpdate
     }
   })
 })
