@@ -77,6 +77,10 @@ module.exports = new GraphQLObjectType({
       type: GraphQLString
     },
 
+    next_available_dates: {
+      type: new GraphQLList(GraphQLInt)
+    },
+
     highlights: {
       type: new GraphQLList(GraphQLString)
     },

@@ -1,6 +1,7 @@
 const {
   GraphQLNonNull,
   GraphQLList,
+  GraphQLInt,
   GraphQLString,
   GraphQLBoolean
 } = require('graphql')
@@ -15,6 +16,7 @@ const adminTourTermsAndConditionsUpdate = require('../utils/mutation-resolvers/a
 const adminTourGuestRequirementsUpdate = require('../utils/mutation-resolvers/adminTourGuestRequirementsUpdate')
 const adminTourMoreTipsUpdate = require('../utils/mutation-resolvers/adminTourMoreTipsUpdate')
 const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourItineraryUpdate')
+const adminTourNextAvailableDatesAdd = require('../utils/mutation-resolvers/adminTourNextAvailableDatesAdd')
 
 module.exports = {
   tour_create: {
@@ -77,6 +79,15 @@ module.exports = {
       more_tips: { type: new GraphQLNonNull(new GraphQLList(GraphQLString)) }
     },
     resolve: adminTourMoreTipsUpdate
+  },
+
+  tour_next_available_date_add: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      date: { type: new GraphQLNonNull(GraphQLInt) }
+    },
+    resolve: adminTourNextAvailableDatesAdd
   },
 
   tour_itinerary_update: {
