@@ -73,6 +73,6 @@ const User = new mongoose.Schema({
     type: String,
     trim: true
   }
-}, { timestamps: true })
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }})
 
 module.exports = mongoose.model('user', User, 'user')

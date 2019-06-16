@@ -144,6 +144,6 @@ const Tour = new Schema({
     required: true,
     default: []
   }
-}, { timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' })
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }})
 
 module.exports = mongoose.model('tour', Tour, 'tour')
