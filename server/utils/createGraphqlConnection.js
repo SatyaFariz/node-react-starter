@@ -5,6 +5,7 @@ module.exports = async (first, databaseQuery, cursorBuilder) => {
   const data = await databaseQuery(limit)
   let { length } = data
 
+  const hasPreviousPage = false // cannot be null, we only need hasNextPage
   let hasNextPage = false
   let endCursor = null
 
@@ -28,13 +29,13 @@ module.exports = async (first, databaseQuery, cursorBuilder) => {
       node: item
     }))
 
-    const pageInfo = { hasNextPage, endCursor }
+    const pageInfo = { hasNextPage, endCursor, hasPreviousPage }
 
     return { edges, pageInfo }
   }
 
   return {
     edges: [],
-    pageInfo: { hasNextPage, endCursor }
+    pageInfo: { hasNextPage, endCursor, hasPreviousPage }
   }
 }

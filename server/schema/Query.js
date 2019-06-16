@@ -4,6 +4,7 @@ const {
 
 const LoggedUser = require('../model/LoggedUser')
 const LoggedAdmin = require('../model/LoggedAdmin')
+const ToursListQuery = require('../queries/ToursListQuery')
 
 module.exports = new GraphQLObjectType({
   name: 'Query',
@@ -16,6 +17,8 @@ module.exports = new GraphQLObjectType({
     logged_admin: {
       type: LoggedAdmin,
       resolve: (root, args, { session: { admin }}) => admin
-    }
+    },
+
+    ...ToursListQuery
   })
 })
