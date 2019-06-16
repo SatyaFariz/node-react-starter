@@ -12,7 +12,7 @@ const { Username } = require('../scalars/Username')
 
 const User = require('../model/User')
 const ActionInfo = require('../model/payload/ActionInfo')
-const UserUniqueIdentifierUpdatePayload = require('../model/payload/UserUniqueIdentifierUpdatePayload')
+const UserCreateOrUpdatePayload = require('../model/payload/UserCreateOrUpdatePayload')
 const AdminCreateInput = require('../model/input/AdminCreateInput')
 const adminNameUpdate = require('../utils/mutation-resolvers/adminNameUpdate')
 const adminCreate = require('../utils/mutation-resolvers/adminCreate')
@@ -58,7 +58,7 @@ module.exports = new GraphQLObjectType({
     },
 
     email_update: {
-      type: UserUniqueIdentifierUpdatePayload,
+      type: UserCreateOrUpdatePayload,
       args: {
         email: { type: new GraphQLNonNull(GraphQLEmail) }
       },
@@ -75,7 +75,7 @@ module.exports = new GraphQLObjectType({
     },
 
     username_update: {
-      type: UserUniqueIdentifierUpdatePayload,
+      type: UserCreateOrUpdatePayload,
       args: {
         username: { type: new GraphQLNonNull(Username) }
       },

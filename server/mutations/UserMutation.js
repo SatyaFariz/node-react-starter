@@ -9,7 +9,7 @@ const { GraphQLEmail } = require('graphql-custom-types')
 const User = require('../model/User')
 const UserInput = require('../model/input/UserInput')
 const SignUpPayload = require('../model/payload/SignUpPayload')
-const UserUniqueIdentifierUpdatePayload = require('../model/payload/UserUniqueIdentifierUpdatePayload')
+const UserCreateOrUpdatePayload = require('../model/payload/UserCreateOrUpdatePayload')
 const ActionInfo = require('../model/payload/ActionInfo')
 const userSignUp = require('../utils/mutation-resolvers/userSignUp')
 const userNameUpdate = require('../utils/mutation-resolvers/userNameUpdate')
@@ -63,7 +63,7 @@ module.exports = new GraphQLObjectType({
     },
 
     email_update: {
-      type: UserUniqueIdentifierUpdatePayload,
+      type: UserCreateOrUpdatePayload,
       args: {
         email: { type: new GraphQLNonNull(GraphQLEmail) }
       },
