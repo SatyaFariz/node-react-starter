@@ -4,7 +4,7 @@ const {
 } = require('graphql')
 
 module.exports = new GraphQLInputObjectType({
-  name: 'TourWhatsIncludedUpdateInput',
+  name: 'TourWhatsIncludedInput',
   fields: () => ({
     foods_included: {
       type: GraphQLString

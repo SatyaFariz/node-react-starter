@@ -8,7 +8,7 @@ const {
 
 const Tour = require('../model/Tour')
 const TourCreateInput = require('../model/input/TourCreateInput')
-const TourWhatsIncludedUpdateInput = require('../model/input/TourWhatsIncludedUpdateInput')
+const TourWhatsIncludedInput = require('../model/input/TourWhatsIncludedInput')
 const adminTourCreate = require('../utils/mutation-resolvers/adminTourCreate')
 const adminTourVisibilityUpdate = require('../utils/mutation-resolvers/adminTourVisibilityUpdate')
 const adminTourHighlightsUpdate = require('../utils/mutation-resolvers/adminTourHighlightsUpdate')
@@ -121,7 +121,7 @@ module.exports = {
     type: Tour,
     args: {
       _id: { type: new GraphQLNonNull(GraphQLString) },
-      whats_included: { type: new GraphQLNonNull(TourWhatsIncludedUpdateInput) }
+      whats_included: { type: new GraphQLNonNull(TourWhatsIncludedInput) }
     },
     resolve: adminTourWhatsIncludedUpdate
   },
