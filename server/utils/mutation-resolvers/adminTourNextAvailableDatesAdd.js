@@ -9,11 +9,11 @@ module.exports = async (root, { _id, date }, { session: { admin }}) => {
     return Tour.findOne({ _id: ObjectId(_id) }, (err, tour) => {
   
       const new_dates = tour.next_available_dates.slice(0, 9)
-      
+
       if(!new_dates.includes(date))
         new_dates.push(date)
 
-      new_dates.sort((a, b) => b - a)
+      new_dates.sort((a, b) => a - b)
 
       tour.next_available_dates = new_dates
 
