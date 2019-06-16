@@ -16,7 +16,8 @@ const adminTourTermsAndConditionsUpdate = require('../utils/mutation-resolvers/a
 const adminTourGuestRequirementsUpdate = require('../utils/mutation-resolvers/adminTourGuestRequirementsUpdate')
 const adminTourMoreTipsUpdate = require('../utils/mutation-resolvers/adminTourMoreTipsUpdate')
 const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourItineraryUpdate')
-const adminTourNextAvailableDatesAdd = require('../utils/mutation-resolvers/adminTourNextAvailableDatesAdd')
+const adminTourNextAvailableDateAdd = require('../utils/mutation-resolvers/adminTourNextAvailableDateAdd')
+const adminTourAvailableDateDelete = require('../utils/mutation-resolvers/adminTourAvailableDateDelete')
 
 module.exports = {
   tour_create: {
@@ -87,7 +88,16 @@ module.exports = {
       _id: { type: new GraphQLNonNull(GraphQLString) },
       date: { type: new GraphQLNonNull(GraphQLInt) }
     },
-    resolve: adminTourNextAvailableDatesAdd
+    resolve: adminTourNextAvailableDateAdd
+  },
+
+  tour_available_date_delete: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      date: { type: new GraphQLNonNull(GraphQLInt) }
+    },
+    resolve: adminTourAvailableDateDelete
   },
 
   tour_itinerary_update: {
