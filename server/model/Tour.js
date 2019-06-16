@@ -29,7 +29,7 @@ module.exports = new GraphQLObjectType({
       type: GraphQLString
     },
 
-    durations_in_days: {
+    duration_in_days: {
       type: GraphQLInt
     },
 
