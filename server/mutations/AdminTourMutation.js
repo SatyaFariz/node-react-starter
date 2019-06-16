@@ -11,6 +11,7 @@ const adminTourCreate = require('../utils/mutation-resolvers/adminTourCreate')
 const adminTourVisibilityUpdate = require('../utils/mutation-resolvers/adminTourVisibilityUpdate')
 const adminTourHighlightsUpdate = require('../utils/mutation-resolvers/adminTourHighlightsUpdate')
 const adminTourCancellationPolicyUpdate = require('../utils/mutation-resolvers/adminTourCancellationPolicyUpdate')
+const adminTourTermsAndConditionsUpdate = require('../utils/mutation-resolvers/adminTourTermsAndConditionsUpdate')
 
 module.exports = {
   tour_create: {
@@ -46,5 +47,14 @@ module.exports = {
       cancellation_policy: { type: new GraphQLNonNull(new GraphQLList(GraphQLString)) }
     },
     resolve: adminTourCancellationPolicyUpdate
+  },
+
+  tour_terms_and_conditions_update: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      terms_and_conditions: { type: new GraphQLNonNull(new GraphQLList(GraphQLString)) }
+    },
+    resolve: adminTourTermsAndConditionsUpdate
   }
 }
