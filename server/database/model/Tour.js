@@ -101,31 +101,26 @@ const Tour = new Schema({
 
   highlights: {
     type: [String],
-    required: true,
     default: []
   },
 
   terms_and_conditions: {
     type: [String],
-    required: true,
     default: []
   },
 
   cancellation_policy: {
     type: [String],
-    required: true,
     default: []
   },
 
   guest_requirements: {
     type: [String],
-    required: true,
     default: []
   },
 
   more_tips: {
     type: [String],
-    required: true,
     default: []
   },
 
@@ -135,13 +130,11 @@ const Tour = new Schema({
 
   photos: {
     type: [Image],
-    required: true,
     default: []
   },
 
   next_available_dates: {
     type: [Number],
-    required: true,
     default: []
   }
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }})
