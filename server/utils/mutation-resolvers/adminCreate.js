@@ -15,9 +15,10 @@ module.exports = async (root, { input }, { session: { admin }}) => {
   })
 
   let action_info = {}
+  let user_data = null
 
   return new Promise((resolve, reject) => {
-    newUser.save(err => {
+    newUser.save((err, doc) => {
       if(err) {
         if(err.name === 'MongoError' && err.code === 11000) {
 
@@ -28,15 +29,13 @@ module.exports = async (root, { input }, { session: { admin }}) => {
           action_info.success = false
           action_info.message = 'Terjadi kesalahan. Silahkan coba lagi.'
         }
-      } else {        
+      } else {
+        user_data = doc
         action_info.success = true
         action_info.message = 'User berhasil dibuat.'
       }
 
-      resolve({
-        action_info,
-        user_data: action_info.success ? newUser : null
-      })
+      resolve({ action_info, user_data })
     })
   })
 }

@@ -15,7 +15,7 @@ module.exports = async (root, { input }, { session }) => {
   let user_id = null
 
   return new Promise((resolve, reject) => {
-    newUser.save(err => {
+    newUser.save((err, doc) => {
       if(err) {
         if(err.name === 'MongoError' && err.code === 11000) {
 
@@ -28,11 +28,11 @@ module.exports = async (root, { input }, { session }) => {
         }
       } else {
         // log the user in
-        session.user = newUser
+        session.user = doc
         
         action_info.success = true
         action_info.message = 'Registrasi berhasil.'
-        user_id = newUser._id.toString()
+        user_id = doc._id.toString()
       }
 
       resolve({
