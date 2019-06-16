@@ -7,23 +7,26 @@ module.exports = async (root, { _id, date }, { session: { admin }}) => {
 
   return new Promise((resolve, reject) => {
     return Tour.findOne({ _id: ObjectId(_id) }, (err, tour) => {
-  
-      const new_dates = tour.next_available_dates.slice(0, 9)
+      
+      const { next_available_dates } = tour
 
-      if(!new_dates.includes(date))
+      if(!next_available_dates.includes(date)) {
+        const new_dates = next_available_dates.slice(0, 9)
         new_dates.push(date)
+        new_dates.sort((a, b) => a - b)
 
-      new_dates.sort((a, b) => a - b)
+        tour.next_available_dates = new_dates
 
-      tour.next_available_dates = new_dates
+        tour.save((err, doc) => {
+          if(err) {
+              console.error('ERROR!')
+          }
 
-      tour.save((err, doc) => {
-        if(err) {
-            console.error('ERROR!')
-        }
-
-        resolve(doc)
-      })
+          resolve(doc)
+        })
+      } else {
+        resolve(tour)
+      }
     })
   })
   
