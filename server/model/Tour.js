@@ -103,6 +103,10 @@ module.exports = new GraphQLObjectType({
 
     photos: {
       type: new GraphQLList(Image)
+    },
+
+    published: {
+      type: GraphQLBoolean
     }
   })
 })
