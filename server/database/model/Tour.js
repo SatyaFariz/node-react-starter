@@ -136,6 +136,11 @@ const Tour = new Schema({
   next_available_dates: {
     type: [Number],
     default: []
+  },
+
+  published: {
+    type: Boolean,
+    default: false
   }
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }})
 
