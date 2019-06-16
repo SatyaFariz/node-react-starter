@@ -39,7 +39,7 @@ module.exports = new GraphQLInputObjectType({
     },
 
     good_for: {
-      type: new GraphQLNonNull(GraphQLString)
-    },
+      type: GraphQLString
+    }
   })
 })

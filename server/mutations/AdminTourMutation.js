@@ -9,6 +9,7 @@ const {
 const Tour = require('../model/Tour')
 const TourCreateInput = require('../model/input/TourCreateInput')
 const TourWhatsIncludedInput = require('../model/input/TourWhatsIncludedInput')
+const TourBasicInfoInput = require('../model/input/TourBasicInfoInput')
 const adminTourCreate = require('../utils/mutation-resolvers/adminTourCreate')
 const adminTourVisibilityUpdate = require('../utils/mutation-resolvers/adminTourVisibilityUpdate')
 const adminTourHighlightsUpdate = require('../utils/mutation-resolvers/adminTourHighlightsUpdate')
@@ -20,6 +21,7 @@ const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourI
 const adminTourNextAvailableDateAdd = require('../utils/mutation-resolvers/adminTourNextAvailableDateAdd')
 const adminTourAvailableDateDelete = require('../utils/mutation-resolvers/adminTourAvailableDateDelete')
 const adminTourWhatsIncludedUpdate = require('../utils/mutation-resolvers/adminTourWhatsIncludedUpdate')
+const adminTourBasicInfoUpdate = require('../utils/mutation-resolvers/adminTourBasicInfoUpdate')
 
 module.exports = {
   tour_create: {
@@ -125,4 +127,13 @@ module.exports = {
     },
     resolve: adminTourWhatsIncludedUpdate
   },
+
+  tour_basic_info_update: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      basic_info: { type: new GraphQLNonNull(TourBasicInfoInput) }
+    },
+    resolve: adminTourBasicInfoUpdate
+  }
 }
