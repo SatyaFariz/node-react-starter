@@ -8,6 +8,7 @@ const {
 
 const Tour = require('../model/Tour')
 const TourCreateInput = require('../model/input/TourCreateInput')
+const TourWhatsIncludedUpdateInput = require('../model/input/TourWhatsIncludedUpdateInput')
 const adminTourCreate = require('../utils/mutation-resolvers/adminTourCreate')
 const adminTourVisibilityUpdate = require('../utils/mutation-resolvers/adminTourVisibilityUpdate')
 const adminTourHighlightsUpdate = require('../utils/mutation-resolvers/adminTourHighlightsUpdate')
@@ -18,6 +19,7 @@ const adminTourMoreTipsUpdate = require('../utils/mutation-resolvers/adminTourMo
 const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourItineraryUpdate')
 const adminTourNextAvailableDateAdd = require('../utils/mutation-resolvers/adminTourNextAvailableDateAdd')
 const adminTourAvailableDateDelete = require('../utils/mutation-resolvers/adminTourAvailableDateDelete')
+const adminTourWhatsIncludedUpdate = require('../utils/mutation-resolvers/adminTourWhatsIncludedUpdate')
 
 module.exports = {
   tour_create: {
@@ -113,5 +115,14 @@ module.exports = {
       }
     },
     resolve: adminTourItineraryUpdate
-  }
+  },
+
+  tour_whats_included_update: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      whats_included: { type: new GraphQLNonNull(TourWhatsIncludedUpdateInput) }
+    },
+    resolve: adminTourWhatsIncludedUpdate
+  },
 }
