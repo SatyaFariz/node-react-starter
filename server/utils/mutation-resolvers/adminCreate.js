@@ -30,10 +30,13 @@ module.exports = async (root, { input }, { session: { admin }}) => {
         }
       } else {        
         action_info.success = true
-        action_info.message = 'Registrasi berhasil.'
+        action_info.message = 'User berhasil dibuat.'
       }
 
-      resolve(action_info)
+      resolve({
+        action_info,
+        user_data: action_info.success ? newUser : null
+      })
     })
   })
 }

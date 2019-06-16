@@ -26,7 +26,7 @@ module.exports = new GraphQLObjectType({
   name: 'AdminMutation',
   fields: () => ({
     user_create: {
-      type: ActionInfo,
+      type: UserCreateOrUpdatePayload,
       args: {
         input: { type: new GraphQLNonNull(AdminCreateInput) }
       },
