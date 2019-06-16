@@ -15,7 +15,6 @@ module.exports = async (root, { input }, { session: { admin }}) => {
   })
 
   let action_info = {}
-  let user_data = null
 
   return new Promise((resolve, reject) => {
     newUser.save((err, doc) => {
@@ -30,12 +29,11 @@ module.exports = async (root, { input }, { session: { admin }}) => {
           action_info.message = 'Terjadi kesalahan. Silahkan coba lagi.'
         }
       } else {
-        user_data = doc
         action_info.success = true
         action_info.message = 'User berhasil dibuat.'
       }
 
-      resolve({ action_info, user_data })
+      resolve({ action_info, user_data: doc })
     })
   })
 }
