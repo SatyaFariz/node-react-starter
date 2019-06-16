@@ -8,7 +8,7 @@ const {
 } = require('graphql')
 
 module.exports = new GraphQLInputObjectType({
-  name: 'SignInInput',
+  name: 'TourBasicInfoInput',
   fields: () => ({
     province: {
       type: new GraphQLNonNull(GraphQLString)
