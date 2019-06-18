@@ -8,6 +8,8 @@ const {
 } = require('graphql')
 
 const Image = require('./Image')
+const TourKidPrice = require('./TourKidPrice')
+const TourPackagePrice = require('./TourPackagePrice')
 
 module.exports = new GraphQLObjectType({
   name: 'Tour',
@@ -35,6 +37,14 @@ module.exports = new GraphQLObjectType({
 
     price_per_person: {
       type: GraphQLFloat
+    },
+
+    kid_price: {
+      type: TourKidPrice
+    },
+
+    package_price: {
+      type: TourPackagePrice
     },
 
     free_cancellation: {
