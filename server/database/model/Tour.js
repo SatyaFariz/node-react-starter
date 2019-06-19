@@ -14,6 +14,11 @@ const Tour = new Schema({
     required: true
   },
 
+  display_location: {
+    type: String,
+    required: true
+  },
+
   name: {
     type: String,
     required: true

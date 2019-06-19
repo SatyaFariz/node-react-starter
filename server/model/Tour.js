@@ -27,6 +27,10 @@ module.exports = new GraphQLObjectType({
       type: GraphQLString
     },
 
+    display_location: {
+      type: GraphQLString
+    },
+
     name: {
       type: GraphQLString
     },

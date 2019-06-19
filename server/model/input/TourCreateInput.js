@@ -18,6 +18,10 @@ module.exports = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString)
     },
 
+    display_location: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
+
     name: {
       type: new GraphQLNonNull(GraphQLString)
     },
