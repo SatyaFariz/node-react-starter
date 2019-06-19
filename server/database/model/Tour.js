@@ -19,6 +19,10 @@ const Tour = new Schema({
     required: true
   },
 
+  category: {
+    type: String
+  },
+
   duration_in_days: {
     type: Number,
     required: true

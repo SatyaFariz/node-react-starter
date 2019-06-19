@@ -22,6 +22,10 @@ module.exports = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString)
     },
 
+    category: {
+      type: GraphQLString
+    },
+
     duration_in_days: {
       type: new GraphQLNonNull(GraphQLInt)
     },
