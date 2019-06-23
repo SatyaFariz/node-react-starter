@@ -19,6 +19,11 @@ module.exports = new GraphQLObjectType({
       resolve: root => root._id.toString()
     },
 
+    tourID: {
+      type: GraphQLString,
+      resolve: root => root._id.toString()
+    },
+
     province: {
       type: GraphQLString
     },
