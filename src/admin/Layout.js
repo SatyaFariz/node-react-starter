@@ -1,13 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { graphql, createFragmentContainer } from 'react-relay'
 
-class Layout extends Component {
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    )
-  }
+const Layout = props => {
+  return (
+    <div>
+      {props.children}
+    </div>
+  )
 }
 
-export default Layout
+export default createFragmentContainer(Layout, {
+  loggedAdmin: graphql`
+    fragment Layout_loggedAdmin on LoggedAdmin {
+      id
+    }
+  `
+})

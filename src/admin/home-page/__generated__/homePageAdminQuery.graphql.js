@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6ce1e8c3f4b03dbbbd61c055922e48b6
+ * @relayHash c2124e29e3574da6d3df1511bb977ef8
  */
 
 /* eslint-disable */
@@ -10,10 +10,11 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type HomePage_loggedAdmin$ref = any;
+type Layout_loggedAdmin$ref = any;
 export type homePageAdminQueryVariables = {||};
 export type homePageAdminQueryResponse = {|
   +logged_admin: ?{|
-    +$fragmentRefs: HomePage_loggedAdmin$ref
+    +$fragmentRefs: Layout_loggedAdmin$ref & HomePage_loggedAdmin$ref
   |}
 |};
 export type homePageAdminQuery = {|
@@ -26,8 +27,13 @@ export type homePageAdminQuery = {|
 /*
 query homePageAdminQuery {
   logged_admin {
+    ...Layout_loggedAdmin
     ...HomePage_loggedAdmin
   }
+}
+
+fragment Layout_loggedAdmin on LoggedAdmin {
+  id
 }
 
 fragment HomePage_loggedAdmin on LoggedAdmin {
@@ -53,6 +59,11 @@ const node/*: ConcreteRequest*/ = {
         "concreteType": "LoggedAdmin",
         "plural": false,
         "selections": [
+          {
+            "kind": "FragmentSpread",
+            "name": "Layout_loggedAdmin",
+            "args": null
+          },
           {
             "kind": "FragmentSpread",
             "name": "HomePage_loggedAdmin",
@@ -91,10 +102,10 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "homePageAdminQuery",
     "id": null,
-    "text": "query homePageAdminQuery {\n  logged_admin {\n    ...HomePage_loggedAdmin\n  }\n}\n\nfragment HomePage_loggedAdmin on LoggedAdmin {\n  id\n}\n",
+    "text": "query homePageAdminQuery {\n  logged_admin {\n    ...Layout_loggedAdmin\n    ...HomePage_loggedAdmin\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment HomePage_loggedAdmin on LoggedAdmin {\n  id\n}\n",
     "metadata": {}
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = '3f53d6c06a9b22f2c0c90db42cc12cc3';
+(node/*: any*/).hash = 'aefd45a2b5e945f10fee83afd21cdd4f';
 module.exports = node;

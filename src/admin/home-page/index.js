@@ -8,6 +8,7 @@ const route = {
   query: graphql`
     query homePageAdminQuery {
       logged_admin {
+        ...Layout_loggedAdmin,
         ...HomePage_loggedAdmin
       }
     }
