@@ -35,9 +35,10 @@ const Component = props => {
 
   const { reset, environment } = useContext(AppContext)
 
-  const [values, setValues] = useState({
-    username: '',
-    password: ''
+  const [input, setInput] = useState({
+    username_or_email: '',
+    password: '',
+    user_type: 'admin'
   })
 
   const [validation, setValidation] = useState({ isValid: false })
@@ -45,13 +46,13 @@ const Component = props => {
   const [isLoading, setLoading] = useState(false)
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value })
+    setInput({ ...input, [name]: event.target.value })
   }
 
   const validate = () => {
     const validator = new Validator([
       {
-        field: 'username',
+        field: 'username_or_email',
         method: Validator.isEmpty,
         validWhen: false,
         message: 'Masukan email atau username anda.'
@@ -64,18 +65,13 @@ const Component = props => {
       }
     ])
 
-    const validation = validator.validate(values)
+    const validation = validator.validate(input)
     setValidation(validation)
     return validation
   }
 
   const login = () => {
     const validation = validate()
-    const input = {
-      username_or_email: values.username,
-      password: values.password,
-      user_type: 'admin'
-    }
 
     if(validation.isValid) {
       SignIn(environment, { input }, (payload, err) => {
@@ -92,9 +88,9 @@ const Component = props => {
           }
         }        
       })      
-    }
 
-    setLoading(true)
+      setLoading(true)
+    }
   }
 
   return (
@@ -102,18 +98,18 @@ const Component = props => {
       <Paper className={c.paper}>
         <TextField
           label="Email/Username"
-          defaultValue={values.name}
-          onChange={handleChange('username')}
+          defaultValue={input.name}
+          onChange={handleChange('username_or_email')}
           margin="normal"
           fullWidth
-          error={validation.username && validation.username.isInvalid}
-          helperText={validation.username && validation.username.message}
+          error={validation.username_or_email && validation.username_or_email.isInvalid}
+          helperText={validation.username_or_email && validation.username_or_email.message}
         />
 
         <TextField
           label="Password"
           type="password"
-          defaultValue={values.password}
+          defaultValue={input.password}
           onChange={handleChange('password')}
           margin="normal"
           fullWidth

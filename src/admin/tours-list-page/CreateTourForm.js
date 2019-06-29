@@ -13,23 +13,23 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
-  const [values, setValues] = useState({
-    username: '',
-    password: ''
+  const [input, setInput] = useState({
+    province: '',
+    city: ''
   })
 
  // const [validation, setValidation] = useState({ isValid: false })
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value })
+    setInput({ ...input, [name]: event.target.value })
   }
 
   return (
     <Paper className={c.container}>
       <TextField
-        label="Email/Username"
-        defaultValue={values.name}
-        onChange={handleChange('username')}
+        label="Province"
+        defaultValue={input.province}
+        onChange={handleChange('province')}
         margin="normal"
         fullWidth
    //     error={validation.username && validation.username.isInvalid}
@@ -38,7 +38,7 @@ const Component = props => {
 
       <TextField
         label="Email/Username"
-        defaultValue={values.name}
+        defaultValue={input.name}
         onChange={handleChange('username')}
         margin="normal"
         fullWidth
