@@ -73,7 +73,8 @@ const Component = props => {
     const validation = validate()
     const input = {
       username_or_email: values.username,
-      password: values.password
+      password: values.password,
+      user_type: 'admin'
     }
 
     if(validation.isValid) {

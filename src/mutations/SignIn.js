@@ -10,13 +10,6 @@ const mutation = graphql`
 `
 
 export default (environment, variables, callback) => {
-  variables = {
-    input: {
-      ...variables.input,
-      user_type: 'admin'
-    }
-  }
-
   commitMutation(
     environment,
     {
