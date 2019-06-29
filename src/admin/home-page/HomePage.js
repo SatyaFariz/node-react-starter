@@ -8,7 +8,6 @@ const styles = props => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink',
     height: '100%'
   }
 })
