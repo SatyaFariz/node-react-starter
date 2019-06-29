@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  toolbar: theme.mixins.toolbar,
 }))
 
 const Component = props => {
@@ -29,7 +30,7 @@ const Component = props => {
       }}
       anchor="left"
     >
-      <div/>
+      <div className={c.toolbar}/>
     </Drawer>
   )
 }
