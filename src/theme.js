@@ -37,5 +37,7 @@ export default createMuiTheme({
 
   color: {
     link: '#365899'
-  }
+  },
+
+  buttonSpinnerSize: 24
 })
