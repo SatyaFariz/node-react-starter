@@ -1,0 +1,258 @@
+# source: http://localhost:4000/graphql
+# timestamp: Sat Jun 29 2019 18:57:43 GMT+0700 (SE Asia Standard Time)
+
+type ActionInfo {
+  success: Boolean
+  message: String
+}
+
+input AdminCreateInput {
+  name: String!
+  username: Username!
+  password: String!
+}
+
+type AdminMutation {
+  user_create(input: AdminCreateInput!): UserUniqueIdentifierUpdatePayload
+  name_update(name: String!): User
+  whatsapp_update(whatsapp: String!): User
+  address_update(address: String!): User
+  email_update(email: Email!): UserUniqueIdentifierUpdatePayload
+  password_update(current_password: String!, new_password: String!): ActionInfo
+  username_update(username: Username!): UserUniqueIdentifierUpdatePayload
+  tour_create(input: TourCreateInput!): Tour
+  tour_visibility_update(_id: String!, published: Boolean!): Tour
+  tour_highlights_update(_id: String!, highlights: [String]!): Tour
+  tour_cancellation_policy_update(_id: String!, cancellation_policy: [String]!): Tour
+  tour_terms_and_conditions_update(_id: String!, terms_and_conditions: [String]!): Tour
+  tour_guest_requirements_update(_id: String!, guest_requirements: [String]!): Tour
+  tour_more_tips_update(_id: String!, more_tips: [String]!): Tour
+  tour_next_available_date_add(_id: String!, date: Int!): Tour
+  tour_available_date_delete(_id: String!, date: Int!): Tour
+  tour_itinerary_update(_id: String!, itinerary: [[String]!]!): Tour
+  tour_whats_included_update(_id: String!, whats_included: TourWhatsIncludedInput!): Tour
+  tour_basic_info_update(_id: String!, basic_info: TourBasicInfoInput!): Tour
+  tour_kid_price_update(_id: String!, kid_price: TourKidPriceInput!): Tour
+  tour_kid_price_delete(_id: String!): Tour
+  tour_package_price_update(_id: String!, package_price: TourPackagePriceInput!): Tour
+  tour_package_price_delete(_id: String!): Tour
+}
+
+"""
+The Email scalar type represents E-Mail addresses compliant to RFC 822.
+"""
+scalar Email
+
+type Image {
+  id: String
+  public_id: String
+  url: String
+  secure_url: String
+  height: Float
+  width: Float
+  caption: String
+  is_spherical: Boolean
+  spherical_url: String
+  spherical_secure_url: String
+}
+
+type LoggedAdmin {
+  id: String
+  user_data: User
+}
+
+type LoggedUser {
+  id: ID
+  user_data: User
+}
+
+type Mutation {
+  user: UserMutation
+  admin: AdminMutation
+  sign_in(input: SignInInput!): ActionInfo
+  sign_out(userType: UserTypeEnum!): ActionInfo
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  logged_user: LoggedUser
+  logged_admin: LoggedAdmin
+  tours(after: String, first: Int): TourConnection
+  tour(tourID: String!): Tour
+}
+
+input SignInInput {
+  username_or_email: String!
+  password: String!
+  user_type: UserTypeEnum!
+}
+
+type SignUpPayload {
+  user_id: String
+  action_info: ActionInfo
+}
+
+type Tour {
+  id: String
+  tourID: String
+  province: String
+  city: String
+  display_location: String
+  name: String
+  category: String
+  duration_in_days: Int
+  price_per_person: Float
+  kid_price: TourKidPrice
+  package_price: TourPackagePrice
+  free_cancellation: Boolean
+  description: String
+  foods_included: String
+  drinks_included: String
+  accomodations_included: String
+  tickets_included: String
+  transportation_included: String
+  equipment_included: String
+  good_for: String
+  location_details: String
+  next_available_dates: [Int]
+  highlights: [String]
+  terms_and_conditions: [String]
+  cancellation_policy: [String]
+  guest_requirements: [String]
+  more_tips: [String]
+  itinerary: [[String]]
+  photos: [Image]
+  published: Boolean
+}
+
+input TourBasicInfoInput {
+  province: String!
+  city: String!
+  display_location: String!
+  name: String!
+  category: String
+  duration_in_days: Int!
+  price_per_person: Float!
+  free_cancellation: Boolean!
+  description: String!
+  good_for: String
+}
+
+"""A connection to a list of items."""
+type TourConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TourEdge]
+}
+
+input TourCreateInput {
+  province: String!
+  city: String!
+  display_location: String!
+  name: String!
+  category: String
+  duration_in_days: Int!
+  price_per_person: Float!
+  description: String!
+  free_cancellation: Boolean!
+  foods_included: String
+  drinks_included: String
+  accomodations_included: String
+  tickets_included: String
+  transportation_included: String
+  equipment_included: String
+  good_for: String
+}
+
+"""An edge in a connection."""
+type TourEdge {
+  """The item at the end of the edge"""
+  node: Tour
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type TourKidPrice {
+  price_per_person: Float
+  age_description: String
+}
+
+input TourKidPriceInput {
+  price_per_person: Float!
+  age_description: String!
+}
+
+type TourPackagePrice {
+  price: Float
+  number_of_people: Int
+}
+
+input TourPackagePriceInput {
+  price: Float!
+  number_of_people: Int!
+}
+
+input TourWhatsIncludedInput {
+  foods_included: String
+  drinks_included: String
+  accomodations_included: String
+  tickets_included: String
+  transportation_included: String
+  equipment_included: String
+}
+
+type User {
+  id: String
+  name: String
+  username: String
+  email: String
+  phone: String
+  whatsapp: String
+  address: String
+}
+
+input UserInput {
+  name: String!
+  username: Username!
+  email: Email!
+  password: String!
+}
+
+type UserMutation {
+  sign_up(input: UserInput!): SignUpPayload
+  name_update(name: String!): User
+  phone_update(phone: String!): User
+  address_update(address: String!): User
+  password_update(current_password: String!, new_password: String!): ActionInfo
+  email_update(email: Email!): UserUniqueIdentifierUpdatePayload
+}
+
+"""Username"""
+scalar Username
+
+enum UserTypeEnum {
+  admin
+  regular_user
+}
+
+type UserUniqueIdentifierUpdatePayload {
+  user_data: User
+  action_info: ActionInfo
+}
