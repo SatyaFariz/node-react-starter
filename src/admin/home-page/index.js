@@ -16,7 +16,7 @@ const route = {
   render: ([HomePage], data, context) => ({ 
     title: 'Tuan Rumah',
     component: (
-      <Layout>
+      <Layout loggedAdmin={data.logged_admin}>
         <HomePage loggedAdmin={data.logged_admin}/>
       </Layout>
     )
