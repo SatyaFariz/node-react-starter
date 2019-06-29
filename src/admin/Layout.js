@@ -7,9 +7,9 @@ import LoginForm from './LoginForm'
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: 'flex',
-    backgroundColor: 'gray'
-  }
+    display: 'flex'
+  },
+  toolbar: theme.mixins.toolbar,
 }))
 
 const Layout = props => {
@@ -22,7 +22,10 @@ const Layout = props => {
     <div className={c.container}>
       <TopBar/>
       <Sidebar/>
-      {props.children}
+      <div>
+        <div className={c.toolbar}/>
+        {props.children}
+      </div>
     </div>
   )
 }
