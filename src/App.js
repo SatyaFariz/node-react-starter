@@ -8,6 +8,7 @@ import queryString from 'query-string'
 import theme from './theme'
 import router from './router'
 import AppRenderer from './AppRenderer'
+import AppContext from './AppContext'
 
 type Props = {
   history: any,
@@ -17,7 +18,8 @@ type Props = {
 class App extends React.Component<Props> {
   static childContextTypes = {
     history: PropTypes.instanceOf(Object).isRequired,
-    reset: PropTypes.func.isRequired
+    reset: PropTypes.func.isRequired,
+    environment: PropTypes.instanceOf(Object).isRequired
   }
 
   state = {
@@ -35,7 +37,8 @@ class App extends React.Component<Props> {
       return new Promise(resolve => {
         this.onRenderComplete = resolve
       })
-    }
+    },
+    environment: this.state.relay
   }
 
   rendererRef = React.createRef()
@@ -102,17 +105,19 @@ class App extends React.Component<Props> {
     const { relay, query, variables, render } = this.state
 
     return (
-      <React.Fragment>
-        <CssBaseline/>
-        <MuiThemeProvider theme={theme}>
-          <QueryRenderer
-            environment={relay}
-            query={query}
-            variables={variables || {}}
-            render={render}
-          />
-        </MuiThemeProvider>
-      </React.Fragment>
+      <AppContext.Provider value={this.childContext}>
+        <React.Fragment>
+          <CssBaseline/>
+          <MuiThemeProvider theme={theme}>
+            <QueryRenderer
+              environment={relay}
+              query={query}
+              variables={variables || {}}
+              render={render}
+            />
+          </MuiThemeProvider>
+        </React.Fragment>
+      </AppContext.Provider>
     )
   }
 }

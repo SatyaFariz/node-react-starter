@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { makeStyles, withTheme } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import TextField from '@material-ui/core/TextField'
@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 
 import Validator from '../utils/validator'
+import AppContext from '../AppContext'
+import SignIn from '../mutations/SignIn'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -30,6 +32,8 @@ const useStyles = makeStyles(theme => ({
 
 const Component = props => {
   const c = useStyles()
+
+  const { reset, environment } = useContext(AppContext)
 
   const [values, setValues] = useState({
     username: '',
@@ -67,14 +71,29 @@ const Component = props => {
 
   const login = () => {
     const validation = validate()
-    if(validation.isValid) {
-      setTimeout(() => {
-        setLoading(false)
-      }, 2000)
-
-      setLoading(true)
-      
+    const input = {
+      username_or_email: values.username,
+      password: values.password
     }
+
+    if(validation.isValid) {
+      SignIn(environment, { input }, (payload, err) => {
+        if(err) {
+          // handle error
+          setLoading(false)
+        } else {
+          const { success, message } = payload
+          if(success) {
+            reset()
+          } else {
+            alert(message)
+            setLoading(false)
+          }
+        }        
+      })      
+    }
+
+    setLoading(true)
   }
 
   return (
