@@ -3,6 +3,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import { makeStyles } from '@material-ui/core/styles'
 import TopBar from './TopBar'
 import Sidebar from './Sidebar'
+import LoginForm from './LoginForm'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -13,6 +14,10 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = props => {
   const c = useStyles()
+
+  if(!props.loggedAdmin)
+    return <LoginForm/>
+
   return (
     <div className={c.container}>
       <TopBar/>
