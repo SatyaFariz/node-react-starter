@@ -37,7 +37,7 @@ module.exports = new GraphQLObjectType({
     sign_out: {
       type: ActionInfo,
       args: {
-        userType: { type: new GraphQLNonNull(UserTypeEnum) }
+        user_type: { type: new GraphQLNonNull(UserTypeEnum) }
       },
       resolve: signOut
     }

@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Sat Jun 29 2019 18:57:43 GMT+0700 (SE Asia Standard Time)
+# timestamp: Sun Jun 30 2019 00:18:07 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -70,7 +70,7 @@ type Mutation {
   user: UserMutation
   admin: AdminMutation
   sign_in(input: SignInInput!): ActionInfo
-  sign_out(userType: UserTypeEnum!): ActionInfo
+  sign_out(user_type: UserTypeEnum!): ActionInfo
 }
 
 """Information about pagination in a connection."""
