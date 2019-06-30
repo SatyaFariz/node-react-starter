@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState, useContext } from 'react'
+import { makeStyles, withTheme } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import Validator from '../../utils/validator'
+import TourCreate from '../../mutations/admin/TourCreate'
+import AppContext from '../../AppContext'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,11 +17,16 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: 20
+  },
+  spinner: {
+    position: 'absolute'
   }
 }))
 
 const Component = props => {
   const c = useStyles()
+
+  const { environment } = useContext(AppContext)
 
   const [input, setInput] = useState({
     province: '',
@@ -40,6 +48,8 @@ const Component = props => {
   })
 
   const [validation, setValidation] = useState({ isValid: false })
+
+  const [isLoading, setLoading] = useState(false)
 
   const handleChange = name => event => {
     setInput({ ...input, [name]: event.target.value })
@@ -115,8 +125,25 @@ const Component = props => {
 
   const save = () => {
     const validation = validate()
-    if(validation.isInvalid) {
-      console.log('')
+
+    const _input = {
+      ...input,
+      duration_in_days: parseInt(input.duration_in_days, 10),
+      price_per_person: parseFloat(input.price_per_person, 10)
+    }
+
+    if(validation.isValid) {
+      TourCreate(environment, { input: _input }, (payload, err) => {
+        if(err) {
+          console.log(err)
+        } else {
+          alert('Created')
+        }
+
+        setLoading(false)
+      })
+
+      setLoading(true)
     }
   }
 
@@ -271,6 +298,7 @@ const Component = props => {
       />
 
       <Button
+        disabled={isLoading}
         color="primary"
         variant="contained"
         onClick={save}
@@ -278,9 +306,12 @@ const Component = props => {
         fullWidth
       >
         Save
+        {isLoading &&
+        <CircularProgress size={props.theme.buttonSpinnerSize} className={c.spinner}/>
+        }
       </Button>
     </Paper>
   )
 }
 
-export default Component
+export default withTheme(Component)
