@@ -8,7 +8,8 @@ const route = {
   query: graphql`
     query toursListPageAdminQuery {
       logged_admin {
-        ...Layout_loggedAdmin
+        ...Layout_loggedAdmin,
+        ...ToursListPage_loggedAdmin
       }
     }
   `,
@@ -16,7 +17,7 @@ const route = {
     title: 'Best App',
     component: (
       <Layout loggedAdmin={data.logged_admin}>
-        <ToursListPage/>
+        <ToursListPage loggedAdmin={data.logged_admin}/>
       </Layout>
     )
   })

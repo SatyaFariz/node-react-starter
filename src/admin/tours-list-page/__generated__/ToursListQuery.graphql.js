@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2fef5d3a1719bfa3d43763e1104a70f2
+ * @relayHash 79133de0f2f876b2706668b74f492ab2
  */
 
 /* eslint-disable */
@@ -9,40 +9,35 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Layout_loggedAdmin$ref = any;
-type ToursListPage_loggedAdmin$ref = any;
-export type toursListPageAdminQueryVariables = {||};
-export type toursListPageAdminQueryResponse = {|
+type ToursList_loggedAdmin$ref = any;
+export type ToursListQueryVariables = {|
+  first?: ?number,
+  after?: ?string,
+|};
+export type ToursListQueryResponse = {|
   +logged_admin: ?{|
-    +$fragmentRefs: Layout_loggedAdmin$ref & ToursListPage_loggedAdmin$ref
+    +$fragmentRefs: ToursList_loggedAdmin$ref
   |}
 |};
-export type toursListPageAdminQuery = {|
-  variables: toursListPageAdminQueryVariables,
-  response: toursListPageAdminQueryResponse,
+export type ToursListQuery = {|
+  variables: ToursListQueryVariables,
+  response: ToursListQueryResponse,
 |};
 */
 
 
 /*
-query toursListPageAdminQuery {
+query ToursListQuery(
+  $first: Int
+  $after: String
+) {
   logged_admin {
-    ...Layout_loggedAdmin
-    ...ToursListPage_loggedAdmin
+    ...ToursList_loggedAdmin_2HEEH6
   }
 }
 
-fragment Layout_loggedAdmin on LoggedAdmin {
-  id
-}
-
-fragment ToursListPage_loggedAdmin on LoggedAdmin {
-  id
-  ...ToursList_loggedAdmin
-}
-
-fragment ToursList_loggedAdmin on LoggedAdmin {
-  tours(first: 12) {
+fragment ToursList_loggedAdmin_2HEEH6 on LoggedAdmin {
+  tours(first: $first, after: $after) {
     edges {
       cursor
       node {
@@ -59,28 +54,40 @@ fragment ToursList_loggedAdmin on LoggedAdmin {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-},
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "first",
+    "type": "Int",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "after",
+    "type": "String",
+    "defaultValue": null
+  }
+],
 v1 = [
   {
-    "kind": "Literal",
+    "kind": "Variable",
+    "name": "after",
+    "variableName": "after"
+  },
+  {
+    "kind": "Variable",
     "name": "first",
-    "value": 12
+    "variableName": "first"
   }
 ];
 return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "toursListPageAdminQuery",
+    "name": "ToursListQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
@@ -93,13 +100,8 @@ return {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "Layout_loggedAdmin",
-            "args": null
-          },
-          {
-            "kind": "FragmentSpread",
-            "name": "ToursListPage_loggedAdmin",
-            "args": null
+            "name": "ToursList_loggedAdmin",
+            "args": (v1/*: any*/)
           }
         ]
       }
@@ -107,8 +109,8 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "toursListPageAdminQuery",
-    "argumentDefinitions": [],
+    "name": "ToursListQuery",
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
@@ -119,12 +121,11 @@ return {
         "concreteType": "LoggedAdmin",
         "plural": false,
         "selections": [
-          (v0/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
             "name": "tours",
-            "storageKey": "tours(first:12)",
+            "storageKey": null,
             "args": (v1/*: any*/),
             "concreteType": "TourConnection",
             "plural": false,
@@ -154,7 +155,13 @@ return {
                     "concreteType": "Tour",
                     "plural": false,
                     "selections": [
-                      (v0/*: any*/),
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "id",
+                        "args": null,
+                        "storageKey": null
+                      },
                       {
                         "kind": "ScalarField",
                         "alias": null,
@@ -208,13 +215,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "toursListPageAdminQuery",
+    "name": "ToursListQuery",
     "id": null,
-    "text": "query toursListPageAdminQuery {\n  logged_admin {\n    ...Layout_loggedAdmin\n    ...ToursListPage_loggedAdmin\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment ToursListPage_loggedAdmin on LoggedAdmin {\n  id\n  ...ToursList_loggedAdmin\n}\n\nfragment ToursList_loggedAdmin on LoggedAdmin {\n  tours(first: 12) {\n    edges {\n      cursor\n      node {\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
+    "text": "query ToursListQuery(\n  $first: Int\n  $after: String\n) {\n  logged_admin {\n    ...ToursList_loggedAdmin_2HEEH6\n  }\n}\n\nfragment ToursList_loggedAdmin_2HEEH6 on LoggedAdmin {\n  tours(first: $first, after: $after) {\n    edges {\n      cursor\n      node {\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0e3153e527e026b2e43d3667bda56f04';
+(node/*: any*/).hash = '09e208b3bf409cfd4f6546df8b6d6f9c';
 module.exports = node;
