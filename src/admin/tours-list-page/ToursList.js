@@ -1,13 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
-import CreateTourForm from './CreateTourForm'
-import ToursList from './ToursList'
-
 const useStyles = makeStyles(theme => ({
   container: {
-    padding: 20,
-    display: 'flex'
+    flexGrow: 1
   }
 }))
 
@@ -16,11 +12,9 @@ const Component = props => {
 
   return (
     <div className={c.container}>
-      <ToursList/>
-      <CreateTourForm/>
+      TEST
     </div>
   )
 }
 
 export default Component
-

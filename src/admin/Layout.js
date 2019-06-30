@@ -9,6 +9,9 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex'
   },
+  content: {
+    width: '100%'
+  },
   toolbar: theme.mixins.toolbar,
 }))
 
@@ -22,7 +25,7 @@ const Layout = props => {
     <div className={c.container}>
       <TopBar/>
       <Sidebar/>
-      <div>
+      <div className={c.content}>
         <div className={c.toolbar}/>
         {props.children}
       </div>
