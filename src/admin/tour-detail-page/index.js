@@ -6,9 +6,12 @@ const route = {
   path: '/tours/:tourID',
   components: () => [import('./TourDetailPage')],
   query: graphql`
-    query tourDetailPageAdminQuery {
+    query tourDetailPageAdminQuery($tourID: String!) {
       logged_admin {
-        ...Layout_loggedAdmin
+        ...Layout_loggedAdmin,
+        tour(tourID: $tourID) {
+          ...TourDetailPage_tour
+        }
       }
     }
   `,
@@ -16,7 +19,7 @@ const route = {
     title: 'Best App',
     component: (
       <Layout loggedAdmin={data.logged_admin}>
-        <TourDetailPage loggedAdmin={data.logged_admin}/>
+        <TourDetailPage tour={data.logged_admin.tour}/>
       </Layout>
     )
   }),

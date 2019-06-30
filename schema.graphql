@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Mon Jul 01 2019 01:09:16 GMT+0700 (SE Asia Standard Time)
+# timestamp: Mon Jul 01 2019 02:04:33 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -60,6 +60,7 @@ type LoggedAdmin {
   id: String
   user_data: User
   tours(after: String, first: Int): TourConnection
+  tour(tourID: String!): Tour
 }
 
 type LoggedUser {

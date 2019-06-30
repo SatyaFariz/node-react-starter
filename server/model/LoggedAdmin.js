@@ -5,6 +5,7 @@ const {
 
 const User = require('./User')
 const ToursListQuery = require('../queries/ToursListQuery')
+const TourQuery = require('../queries/TourQuery')
 
 module.exports = new GraphQLObjectType({
   name: 'LoggedAdmin',
@@ -19,6 +20,7 @@ module.exports = new GraphQLObjectType({
       resolve: root => root
     },
 
-    ...ToursListQuery
+    ...ToursListQuery,
+    ...TourQuery
   })
 })

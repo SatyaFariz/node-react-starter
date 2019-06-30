@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { graphql, createFragmentContainer } from 'react-relay'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -17,4 +18,10 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment TourDetailPage_tour on Tour {
+      id
+    }
+  `
+})
