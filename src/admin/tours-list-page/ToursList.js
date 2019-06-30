@@ -19,7 +19,7 @@ const Component = props => {
     <div className={c.container}>
       {edges.map(item => {
         return (
-          <div>
+          <div key={item.cursor}>
           <Link href={`/admin/tours/${item.node.id}`}>{item.cursor}</Link>
           </div>
         )
