@@ -13,10 +13,10 @@ const Component = props => {
 
   return (
     <div>
-      <SectionHeader title={props.title}/>
-      <div className={c.container} onClick={props.toggleEdit}>
-        Edit
-      </div>
+    <SectionHeader title={props.title}/>
+    <div className={c.container} onClick={props.toggleEdit}>
+      Eit
+    </div>
     </div>
   )
 }

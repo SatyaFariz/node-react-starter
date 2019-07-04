@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import SectionHeader from './SectionHeader'
+import BasicInfoEdit from './BasicInfoEdit'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -17,9 +18,35 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const [isEditing, setEditing] = useState(false)
+  const [showEditButton, setEditButtonVisible] = useState(false)
+
+  const toggleEdit = () => setEditing(!isEditing)
+
+  const toggleEditButtonVisibility = () => setEditButtonVisible(!showEditButton)
+
+  const title = 'Basic Info'
+
+  if(isEditing)
+    return (
+      <BasicInfoEdit
+        title={title}
+        toggleEdit={toggleEdit}
+      />
+    )
+
   return (
-    <div className={c.container}>
-      <SectionHeader title="Basic Info"/>
+    <div 
+      className={c.container} 
+      onMouseLeave={toggleEditButtonVisibility}
+      onMouseEnter={toggleEditButtonVisibility}
+      showEditButton={showEditButton}
+    >
+      <SectionHeader
+        onEditButtonClick={toggleEdit}
+        title={title} 
+        showEditButton={showEditButton}
+      />
       <div className={c.a}>
         <Typography>
           Province: Test

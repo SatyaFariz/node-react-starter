@@ -21,9 +21,11 @@ const Component = props => {
         {props.title}
       </Typography>
     
-      <IconButton>
+      {props.showEditButton &&
+      <IconButton onClick={props.onEditButtonClick}>
         <EditButton size="small"/>
       </IconButton>
+      }
     </div>
   )
 }
