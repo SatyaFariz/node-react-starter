@@ -16,18 +16,21 @@ const Component = props => {
   const [isEditing, setEditing] = useState(false)
   const [showEditButton, setEditButtonVisible] = useState(false)
 
-  const toggleEdit = () => setEditing(!isEditing)
-  const toggleEditButtonVisibility = () => setEditButtonVisible(!showEditButton)
+  const closeEdit = () => {
+    setEditButtonVisible(true)
+    setEditing(false)
+  }
 
-  const title = "What's Included"
+  const openEdit = () => {
+    setEditButtonVisible(false)
+    setEditing(true)
+  }
 
-  if(isEditing)
-    return (
-      <WhatsIncludedEdit
-        title={title}
-        toggleEdit={toggleEdit}
-      />
-    )
+  const toggleEditButtonVisibility = () => {
+    if(!isEditing) {
+      setEditButtonVisible(!showEditButton)
+    }
+  }
 
   return (
     <div 
@@ -36,11 +39,14 @@ const Component = props => {
       onMouseEnter={toggleEditButtonVisibility}
     >
       <SectionHeader 
-        title={title}
+        title="What's Included"
         showEditButton={showEditButton}
-        onEditButtonClick={toggleEdit}
+        onEditButtonClick={openEdit}
       />
 
+      {isEditing ?
+      <WhatsIncludedEdit closeEdit={closeEdit}/>
+      :
       <div>
         <Typography>
           Foods: Test
@@ -61,6 +67,7 @@ const Component = props => {
           Equipment: 2 Days
         </Typography>
       </div>
+      }
     </div>
   )
 }

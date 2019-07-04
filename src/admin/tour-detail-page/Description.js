@@ -14,37 +14,45 @@ const Component = props => {
   const c = useStyles()
 
   const [isEditing, setEditing] = useState(false)
-  const [showEditButton, setEditButtonVisibility] = useState(false)
+  const [showEditButton, setEditButtonVisible] = useState(false)
 
-  const toggleEdit = () => setEditing(!isEditing)
+  const closeEdit = () => {
+    setEditButtonVisible(true)
+    setEditing(false)
+  }
 
-  const toggleEditButtonVisibility = () => setEditButtonVisibility(!showEditButton)
+  const openEdit = () => {
+    setEditButtonVisible(false)
+    setEditing(true)
+  }
 
-  const title = 'Description'
-
-  if(isEditing)
-    return (
-      <DescriptionEdit title={title} toggleEdit={toggleEdit}/>
-    )
+  const toggleEditButtonVisibility = () => {
+    if(!isEditing) {
+      setEditButtonVisible(!showEditButton)
+    }
+  }
 
   return (
     <div 
       className={c.container}
       onMouseLeave={toggleEditButtonVisibility}
       onMouseEnter={toggleEditButtonVisibility}
-      showEditButton={showEditButton}
     >
       <SectionHeader
         showEditButton={showEditButton}
-        onEditButtonClick={toggleEdit}
-        title={title}
+        onEditButtonClick={openEdit}
+        title="Description"
       />
      
+      {isEditing ?
+      <DescriptionEdit closeEdit={closeEdit}/>
+      :
       <div>
         <Typography>
           Province: Test
         </Typography>
       </div>
+      }
     </div>
   )
 }

@@ -21,19 +21,21 @@ const Component = props => {
   const [isEditing, setEditing] = useState(false)
   const [showEditButton, setEditButtonVisible] = useState(false)
 
-  const toggleEdit = () => setEditing(!isEditing)
+  const closeEdit = () => {
+    setEditButtonVisible(true)
+    setEditing(false)
+  }
 
-  const toggleEditButtonVisibility = () => setEditButtonVisible(!showEditButton)
+  const openEdit = () => {
+    setEditButtonVisible(false)
+    setEditing(true)
+  }
 
-  const title = 'Basic Info'
-
-  if(isEditing)
-    return (
-      <BasicInfoEdit
-        title={title}
-        toggleEdit={toggleEdit}
-      />
-    )
+  const toggleEditButtonVisibility = () => {
+    if(!isEditing) {
+      setEditButtonVisible(!showEditButton)
+    }
+  }
 
   return (
     <div 
@@ -42,10 +44,14 @@ const Component = props => {
       onMouseEnter={toggleEditButtonVisibility}
     >
       <SectionHeader
-        onEditButtonClick={toggleEdit}
-        title={title} 
+        onEditButtonClick={openEdit}
+        title="Basic Info" 
         showEditButton={showEditButton}
       />
+
+      {isEditing ?
+      <BasicInfoEdit closeEdit={closeEdit}/>
+      :
       <div className={c.a}>
         <Typography>
           Province: Test
@@ -72,6 +78,7 @@ const Component = props => {
           Good For: Test
         </Typography>
       </div>
+      }
     </div>
   )
 }
