@@ -14,10 +14,9 @@ const Component = props => {
   const c = useStyles()
 
   const [isEditing, setEditing] = useState(false)
-  const [showEditButton, setEditButtonVisible] = useState(false)
+  const [editButtonVisible, setEditButtonVisible] = useState(false)
 
   const closeEdit = () => {
-    setEditButtonVisible(true)
     setEditing(false)
   }
 
@@ -26,22 +25,20 @@ const Component = props => {
     setEditing(true)
   }
 
-  const toggleEditButtonVisibility = () => {
-    if(!isEditing) {
-      setEditButtonVisible(!showEditButton)
-    }
-  }
+  const showEditButton = () => !isEditing && !editButtonVisible && setEditButtonVisible(true)
+
+  const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
   return (
     <div 
       className={c.container}
-      onMouseEnter={toggleEditButtonVisibility}
-      onMouseLeave={toggleEditButtonVisibility}
+      onMouseOver={showEditButton}
+      onMouseLeave={hideEditButton}
     >
       <SectionHeader 
         title="Package Price" 
         onEditButtonClick={openEdit}
-        showEditButton={showEditButton}
+        showEditButton={editButtonVisible}
       />
 
       {isEditing ?
