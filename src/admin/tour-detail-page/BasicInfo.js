@@ -40,7 +40,6 @@ const Component = props => {
       className={c.container} 
       onMouseLeave={toggleEditButtonVisibility}
       onMouseEnter={toggleEditButtonVisibility}
-      showEditButton={showEditButton}
     >
       <SectionHeader
         onEditButtonClick={toggleEdit}
