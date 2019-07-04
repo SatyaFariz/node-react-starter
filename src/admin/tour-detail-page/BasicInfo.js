@@ -1,10 +1,16 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import SectionHeader from './SectionHeader'
 
 const useStyles = makeStyles(theme => ({
   container: {
 
+  },
+
+  a: {
+    backgroundColor: theme.palette.grey[100],
+    padding: 20
   }
 }))
 
@@ -13,10 +19,8 @@ const Component = props => {
 
   return (
     <div className={c.container}>
-      <Typography variant="h4" gutterBottom className={c.title}>
-        Basic Info
-      </Typography>
-      <div>
+      <SectionHeader title="Basic Info"/>
+      <div className={c.a}>
         <Typography>
           Province: Test
         </Typography>
