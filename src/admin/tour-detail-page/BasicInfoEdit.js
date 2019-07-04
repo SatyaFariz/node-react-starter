@@ -1,22 +1,12 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
 
 const useStyles = makeStyles(theme => ({
   container: {
 
-  },
-
-  buttonsContainer: {
-    marginTop: 10,
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-
-  cancelButton: {
-    marginLeft: theme.spacing(1)
   }
 }))
 
@@ -192,22 +182,10 @@ const Component = props => {
         helperText={validation.price_per_person && validation.price_per_person.message}
       />
 
-      <div className={c.buttonsContainer}>
-        <Button
-          onClick={save}
-          variant="outlined"
-        >
-          Save
-        </Button>
-
-        <Button
-          variant="outlined"
-          onClick={props.closeEdit}
-          className={c.cancelButton}
-        >
-          Cancel
-        </Button>
-      </div>
+      <FormActionButtons
+        onSaveButtonClick={save}
+        onCancelButtonClick={props.closeEdit}
+      />
     </div>
   )
 }
