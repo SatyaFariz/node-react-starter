@@ -7,6 +7,12 @@ import BasicInfo from './BasicInfo'
 import WhatsIncluded from './WhatsIncluded'
 import KidPrice from './KidPrice'
 import PackagePrice from './PackagePrice'
+import Highlights from './Highlights'
+import GuestRequirements from './GuestRequirements'
+import MoreTips from './MoreTips'
+import TermsAndConditions from './TermsAndConditions'
+import CancellationPolicy from './CancellationPolicy'
+import Itinerary from './Itinerary'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -36,6 +42,12 @@ const Component = props => {
         <WhatsIncluded/>
         <KidPrice/>
         <PackagePrice/>
+        <Highlights/>
+        <GuestRequirements/>
+        <MoreTips/>
+        <TermsAndConditions/>
+        <CancellationPolicy/>
+        <Itinerary/>
       </div>
     </div>
   )
