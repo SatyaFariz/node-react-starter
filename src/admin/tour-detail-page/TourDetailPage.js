@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import Typography from '@material-ui/core/Typography'
 
 import BasicInfo from './BasicInfo'
+import Description from './Description'
 import WhatsIncluded from './WhatsIncluded'
 import KidPrice from './KidPrice'
 import PackagePrice from './PackagePrice'
@@ -39,6 +40,7 @@ const Component = props => {
 
       <div className={c.innerContainer}>
         <BasicInfo/>
+        <Description/>
         <WhatsIncluded/>
         <KidPrice/>
         <PackagePrice/>
