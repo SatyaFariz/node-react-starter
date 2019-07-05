@@ -10,6 +10,7 @@
 import type { ReaderFragment } from 'relay-runtime';
 type BasicInfo_tour$ref = any;
 type Description_tour$ref = any;
+type Highlights_tour$ref = any;
 type KidPrice_tour$ref = any;
 type PackagePrice_tour$ref = any;
 type WhatsIncluded_tour$ref = any;
@@ -18,7 +19,7 @@ declare export opaque type TourDetailPage_tour$ref: FragmentReference;
 declare export opaque type TourDetailPage_tour$fragmentType: TourDetailPage_tour$ref;
 export type TourDetailPage_tour = {|
   +id: ?string,
-  +$fragmentRefs: Description_tour$ref & BasicInfo_tour$ref & WhatsIncluded_tour$ref & KidPrice_tour$ref & PackagePrice_tour$ref,
+  +$fragmentRefs: Description_tour$ref & BasicInfo_tour$ref & WhatsIncluded_tour$ref & KidPrice_tour$ref & PackagePrice_tour$ref & Highlights_tour$ref,
   +$refType: TourDetailPage_tour$ref,
 |};
 export type TourDetailPage_tour$data = TourDetailPage_tour;
@@ -67,9 +68,14 @@ const node/*: ReaderFragment*/ = {
       "kind": "FragmentSpread",
       "name": "PackagePrice_tour",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "Highlights_tour",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'ab21d1253bf31f98c6d4757ee19d343a';
+(node/*: any*/).hash = '46372b9b291ad6628297ad739ad9c9e2';
 module.exports = node;
