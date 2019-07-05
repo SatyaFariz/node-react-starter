@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
+import KidPriceUpdate from '../../mutations/admin/TourKidPriceUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -13,9 +15,11 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { kid_price, tourID } = props.tour
+
   const [input, setInput] = useState({
-    price_per_person: '',
-    age_description: ''
+    price_per_person: (kid_price && kid_price.price_per_person.toString()) || '',
+    age_description: (kid_price && kid_price.age_description) || ''
   })
 
   const [validation, setValidation] = useState({ isValid: false })
@@ -46,7 +50,19 @@ const Component = props => {
   }
 
   const save = () => {
-    validate()
+    const validation = validate()
+    if(validation.isValid) {
+      const variables = {
+        _id: tourID,
+        kid_price: {
+          ...input,
+          price_per_person: parseFloat(input.price_per_person, 10)
+        }
+      }
+
+      KidPriceUpdate(props.relay.environment, variables)
+      props.closeEdit()
+    }
   }
 
   return (
@@ -63,7 +79,7 @@ const Component = props => {
 
       <TextField
         label="Age Description"
-        defaultValue={input.name}
+        defaultValue={input.age_description}
         onChange={handleChange('age_description')}
         margin="normal"
         fullWidth
@@ -79,4 +95,14 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment KidPriceEdit_tour on Tour {
+      tourID,
+      kid_price {
+        price_per_person,
+        age_description
+      }
+    }
+  `
+})

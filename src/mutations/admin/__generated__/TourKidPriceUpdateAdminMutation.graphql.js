@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 447a65561c140586103fbff121d9c0a7
+ * @relayHash c78c6cf9060eea4351ccf4b80f4d798c
  */
 
 /* eslint-disable */
@@ -14,7 +14,8 @@ export type TourKidPriceInput = {|
   age_description: string,
 |};
 export type TourKidPriceUpdateAdminMutationVariables = {|
-  kid_price: TourKidPriceInput
+  _id: string,
+  kid_price: TourKidPriceInput,
 |};
 export type TourKidPriceUpdateAdminMutationResponse = {|
   +admin: ?{|
@@ -36,10 +37,11 @@ export type TourKidPriceUpdateAdminMutation = {|
 
 /*
 mutation TourKidPriceUpdateAdminMutation(
+  $_id: String!
   $kid_price: TourKidPriceInput!
 ) {
   admin {
-    tour_kid_price_update(kid_price: $kid_price) {
+    tour_kid_price_update(_id: $_id, kid_price: $kid_price) {
       id
       kid_price {
         price_per_person
@@ -52,6 +54,12 @@ mutation TourKidPriceUpdateAdminMutation(
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "_id",
+    "type": "String!",
+    "defaultValue": null
+  },
   {
     "kind": "LocalArgument",
     "name": "kid_price",
@@ -75,6 +83,11 @@ v1 = [
         "name": "tour_kid_price_update",
         "storageKey": null,
         "args": [
+          {
+            "kind": "Variable",
+            "name": "_id",
+            "variableName": "_id"
+          },
           {
             "kind": "Variable",
             "name": "kid_price",
@@ -141,11 +154,11 @@ return {
     "operationKind": "mutation",
     "name": "TourKidPriceUpdateAdminMutation",
     "id": null,
-    "text": "mutation TourKidPriceUpdateAdminMutation(\n  $kid_price: TourKidPriceInput!\n) {\n  admin {\n    tour_kid_price_update(kid_price: $kid_price) {\n      id\n      kid_price {\n        price_per_person\n        age_description\n      }\n    }\n  }\n}\n",
+    "text": "mutation TourKidPriceUpdateAdminMutation(\n  $_id: String!\n  $kid_price: TourKidPriceInput!\n) {\n  admin {\n    tour_kid_price_update(_id: $_id, kid_price: $kid_price) {\n      id\n      kid_price {\n        price_per_person\n        age_description\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c54e346832fb07a6e31f70b9c9563466';
+(node/*: any*/).hash = '16f2ff77f4410e5c2c08e975e5f69b6d';
 module.exports = node;
