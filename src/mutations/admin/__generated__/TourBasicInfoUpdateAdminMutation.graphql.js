@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5b5c5002759442869e6d1bf87bdcf506
+ * @relayHash 09a2a3d57f865cb6286824d218cfeb6d
  */
 
 /* eslint-disable */
@@ -21,7 +21,8 @@ export type TourBasicInfoInput = {|
   good_for?: ?string,
 |};
 export type TourBasicInfoUpdateAdminMutationVariables = {|
-  basic_info: TourBasicInfoInput
+  _id: string,
+  basic_info: TourBasicInfoInput,
 |};
 export type TourBasicInfoUpdateAdminMutationResponse = {|
   +admin: ?{|
@@ -47,10 +48,11 @@ export type TourBasicInfoUpdateAdminMutation = {|
 
 /*
 mutation TourBasicInfoUpdateAdminMutation(
+  $_id: String!
   $basic_info: TourBasicInfoInput!
 ) {
   admin {
-    tour_basic_info_update(basic_info: $basic_info) {
+    tour_basic_info_update(_id: $_id, basic_info: $basic_info) {
       id
       province
       city
@@ -67,6 +69,12 @@ mutation TourBasicInfoUpdateAdminMutation(
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "_id",
+    "type": "String!",
+    "defaultValue": null
+  },
   {
     "kind": "LocalArgument",
     "name": "basic_info",
@@ -90,6 +98,11 @@ v1 = [
         "name": "tour_basic_info_update",
         "storageKey": null,
         "args": [
+          {
+            "kind": "Variable",
+            "name": "_id",
+            "variableName": "_id"
+          },
           {
             "kind": "Variable",
             "name": "basic_info",
@@ -187,11 +200,11 @@ return {
     "operationKind": "mutation",
     "name": "TourBasicInfoUpdateAdminMutation",
     "id": null,
-    "text": "mutation TourBasicInfoUpdateAdminMutation(\n  $basic_info: TourBasicInfoInput!\n) {\n  admin {\n    tour_basic_info_update(basic_info: $basic_info) {\n      id\n      province\n      city\n      display_location\n      name\n      category\n      duration_in_days\n      price_per_person\n      good_for\n    }\n  }\n}\n",
+    "text": "mutation TourBasicInfoUpdateAdminMutation(\n  $_id: String!\n  $basic_info: TourBasicInfoInput!\n) {\n  admin {\n    tour_basic_info_update(_id: $_id, basic_info: $basic_info) {\n      id\n      province\n      city\n      display_location\n      name\n      category\n      duration_in_days\n      price_per_person\n      good_for\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '67c83a78109e163067544de210ab25dd';
+(node/*: any*/).hash = '81b0e2f289172fbfbd31c3deedabebac';
 module.exports = node;

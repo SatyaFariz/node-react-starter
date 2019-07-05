@@ -16,6 +16,7 @@ export type BasicInfoEdit_tour = {|
   +province: ?string,
   +city: ?string,
   +display_location: ?string,
+  +free_cancellation: ?boolean,
   +name: ?string,
   +category: ?string,
   +duration_in_days: ?number,
@@ -69,6 +70,13 @@ const node/*: ReaderFragment*/ = {
     {
       "kind": "ScalarField",
       "alias": null,
+      "name": "free_cancellation",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
       "name": "name",
       "args": null,
       "storageKey": null
@@ -104,5 +112,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '565711b42f3136b21d3fb2d5e306064a';
+(node/*: any*/).hash = '0327b7c7da263e07670045f976e0fe93';
 module.exports = node;

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
 import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
+import BasicInfoUpdate from '../../mutations/admin/TourBasicInfoUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -20,6 +22,7 @@ const Component = props => {
     province: tour.province,
     city: tour.city,
     display_location: tour.display_location,
+    free_cancellation: tour.free_cancellation,
     name: tour.name,
     category: tour.category || '',
     price_per_person: tour.price_per_person.toString(),
@@ -87,12 +90,6 @@ const Component = props => {
         method: isZeroOrNegative,
         validWhen: false,
         message: 'This field must be greater than 0.'
-      },
-      {
-        field: 'description',
-        method: Validator.isEmpty,
-        validWhen: false,
-        message: 'This field is required.'
       }
     ])
 
@@ -102,7 +99,20 @@ const Component = props => {
   }
 
   const save = () => {
-    validate()
+    const validation = validate()
+    if(validation.isValid) {
+      const variables = {
+        _id: tour.tourID,
+        basic_info: {
+          ...input,
+          price_per_person: parseFloat(input.price_per_person, 10),
+          duration_in_days: parseInt(input.duration_in_days, 10)
+        }
+      }
+
+      BasicInfoUpdate(props.relay.environment, variables)
+      props.closeEdit()
+    }
   }
 
   return (
@@ -177,6 +187,18 @@ const Component = props => {
         helperText={validation.price_per_person && validation.price_per_person.message}
       />
 
+      <TextField
+        select
+        label="Free Cancellation"
+        value={input.free_cancellation}
+        onChange={handleChange('free_cancellation')}
+        margin="normal"
+        fullWidth
+      >
+        <MenuItem value={false}>No</MenuItem>
+        <MenuItem value={true}>Yes</MenuItem>
+      </TextField>
+
       <FormActionButtons
         onSaveButtonClick={save}
         onCancelButtonClick={props.closeEdit}
@@ -192,6 +214,7 @@ export default createFragmentContainer(Component, {
       province,
       city,
       display_location,
+      free_cancellation,
       name,
       category,
       duration_in_days,
