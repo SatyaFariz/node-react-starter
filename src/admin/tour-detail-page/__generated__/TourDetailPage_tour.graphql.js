@@ -8,13 +8,14 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
+type BasicInfo_tour$ref = any;
 type Description_tour$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type TourDetailPage_tour$ref: FragmentReference;
 declare export opaque type TourDetailPage_tour$fragmentType: TourDetailPage_tour$ref;
 export type TourDetailPage_tour = {|
   +id: ?string,
-  +$fragmentRefs: Description_tour$ref,
+  +$fragmentRefs: Description_tour$ref & BasicInfo_tour$ref,
   +$refType: TourDetailPage_tour$ref,
 |};
 export type TourDetailPage_tour$data = TourDetailPage_tour;
@@ -43,9 +44,14 @@ const node/*: ReaderFragment*/ = {
       "kind": "FragmentSpread",
       "name": "Description_tour",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "BasicInfo_tour",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'cf3a9253e40db3dbede72bee764f7c02';
+(node/*: any*/).hash = '9dea7dcaa9ce3fa6f4619e8d6a8fc155';
 module.exports = node;

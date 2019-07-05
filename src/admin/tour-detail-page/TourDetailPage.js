@@ -41,7 +41,7 @@ const Component = props => {
       </Typography>
 
       <div className={c.innerContainer}>
-        <BasicInfo/>
+        <BasicInfo tour={tour}/>
         <Description tour={tour}/>
         <WhatsIncluded/>
         <KidPrice/>
@@ -61,7 +61,8 @@ export default createFragmentContainer(Component, {
   tour: graphql`
     fragment TourDetailPage_tour on Tour {
       id,
-      ...Description_tour
+      ...Description_tour,
+      ...BasicInfo_tour
     }
   `
 })

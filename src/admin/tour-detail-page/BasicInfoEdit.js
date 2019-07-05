@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
 
@@ -13,23 +14,17 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { tour } = props
+
   const [input, setInput] = useState({
-    province: '',
-    city: '',
-    display_location: '',
-    name: '',
-    category: '',
-    price_per_person: '',
-    duration_in_days: '',
-    description: '',
-    free_cancellation: false,
-    foods_included: '',
-    drinks_included: '',
-    accomodations_included: '',
-    tickets_included: '',
-    transportation_included: '',
-    equipment_included: '',
-    good_for: ''
+    province: tour.province,
+    city: tour.city,
+    display_location: tour.display_location,
+    name: tour.name,
+    category: tour.category || '',
+    price_per_person: tour.price_per_person.toString(),
+    duration_in_days: tour.duration_in_days.toString(),
+    good_for: tour.good_for || ''
   })
 
   const [validation, setValidation] = useState({ isValid: false })
@@ -124,7 +119,7 @@ const Component = props => {
 
       <TextField
         label="*City"
-        defaultValue={input.name}
+        defaultValue={input.city}
         onChange={handleChange('city')}
         margin="normal"
         fullWidth
@@ -134,7 +129,7 @@ const Component = props => {
 
       <TextField
         label="*Display Location"
-        defaultValue={input.name}
+        defaultValue={input.display_location}
         onChange={handleChange('display_location')}
         margin="normal"
         fullWidth
@@ -154,7 +149,7 @@ const Component = props => {
 
       <TextField
         label="Category"
-        defaultValue={input.name}
+        defaultValue={input.category}
         onChange={handleChange('category')}
         margin="normal"
         fullWidth
@@ -162,7 +157,7 @@ const Component = props => {
 
       <TextField
         label="*Duration (days)"
-        defaultValue={input.name}
+        defaultValue={input.duration_in_days}
         onChange={handleChange('duration_in_days')}
         margin="normal"
         fullWidth
@@ -173,7 +168,7 @@ const Component = props => {
 
       <TextField
         label="*Price/Person"
-        defaultValue={input.name}
+        defaultValue={input.price_per_person}
         onChange={handleChange('price_per_person')}
         margin="normal"
         type="number"
@@ -190,4 +185,18 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment BasicInfoEdit_tour on Tour {
+      tourID,
+      province,
+      city,
+      display_location,
+      name,
+      category,
+      duration_in_days,
+      price_per_person,
+      good_for
+    }
+  `
+})

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import BasicInfoEdit from './BasicInfoEdit'
 
@@ -17,6 +18,8 @@ const useStyles = makeStyles(theme => ({
 
 const Component = props => {
   const c = useStyles()
+
+  const { tour } = props
 
   const [isEditing, setEditing] = useState(false)
   const [editButtonVisible, setEditButtonVisible] = useState(false)
@@ -47,32 +50,32 @@ const Component = props => {
       />
 
       {isEditing ?
-      <BasicInfoEdit closeEdit={closeEdit}/>
+      <BasicInfoEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div className={c.a}>
         <Typography>
-          Province: Test
+          Province: {tour.province}
         </Typography>
         <Typography>
-          City: Test
+          City: {tour.city}
         </Typography>
         <Typography>
-          Display Location: Test
+          Display Location: {tour.display_location}
         </Typography>
         <Typography>
-          Name: Test
+          Name: {tour.name}
         </Typography>
         <Typography>
-          Category: -
+          Category: {tour.category}
         </Typography>
         <Typography>
-          Duration: 2 Days
+          Duration: {tour.duration_in_days} Days
         </Typography>
         <Typography>
-          Price/Person: Test
+          Price/Person: {tour.price_per_person}
         </Typography>
         <Typography>
-          Good For: Test
+          Good For: {tour.good_for}
         </Typography>
       </div>
       }
@@ -80,4 +83,19 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment BasicInfo_tour on Tour {
+      id,
+      province,
+      city,
+      display_location,
+      name,
+      category,
+      duration_in_days,
+      price_per_person,
+      good_for,
+      ...BasicInfoEdit_tour
+    }
+  `
+})
