@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Mon Jul 01 2019 02:04:33 GMT+0700 (SE Asia Standard Time)
+# timestamp: Fri Jul 05 2019 12:41:13 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -21,6 +21,7 @@ type AdminMutation {
   password_update(current_password: String!, new_password: String!): ActionInfo
   username_update(username: Username!): UserUniqueIdentifierUpdatePayload
   tour_create(input: TourCreateInput!): Tour
+  tour_description_update(_id: String!, description: String!): Tour
   tour_visibility_update(_id: String!, published: Boolean!): Tour
   tour_highlights_update(_id: String!, highlights: [String]!): Tour
   tour_cancellation_policy_update(_id: String!, cancellation_policy: [String]!): Tour
@@ -150,7 +151,6 @@ input TourBasicInfoInput {
   duration_in_days: Int!
   price_per_person: Float!
   free_cancellation: Boolean!
-  description: String!
   good_for: String
 }
 

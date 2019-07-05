@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5bf06fbde885e868f1dd9bc75159ce4f
+ * @relayHash 5b5c5002759442869e6d1bf87bdcf506
  */
 
 /* eslint-disable */
@@ -18,7 +18,6 @@ export type TourBasicInfoInput = {|
   duration_in_days: number,
   price_per_person: number,
   free_cancellation: boolean,
-  description: string,
   good_for?: ?string,
 |};
 export type TourBasicInfoUpdateAdminMutationVariables = {|
