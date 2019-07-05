@@ -28,6 +28,7 @@ const adminTourKidPriceUpdate = require('../utils/mutation-resolvers/adminTourKi
 const adminTourKidPriceDelete = require('../utils/mutation-resolvers/adminTourKidPriceDelete')
 const adminTourPackagePriceUpdate = require('../utils/mutation-resolvers/adminTourPackagePriceUpdate')
 const adminTourPackagePriceDelete = require('../utils/mutation-resolvers/adminTourPackagePriceDelete')
+const adminTourDescriptionUpdate = require('../utils/mutation-resolvers/adminTourDescriptionUpdate')
 
 module.exports = {
   tour_create: {
@@ -36,6 +37,15 @@ module.exports = {
       input: { type: new GraphQLNonNull(TourCreateInput) }
     },
     resolve: adminTourCreate
+  },
+
+  tour_description_update: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      description: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    resolve: adminTourDescriptionUpdate
   },
 
   tour_visibility_update: {

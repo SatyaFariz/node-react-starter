@@ -42,10 +42,6 @@ module.exports = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLBoolean)
     },
 
-    description: {
-      type: new GraphQLNonNull(GraphQLString)
-    },
-
     good_for: {
       type: GraphQLString
     }
