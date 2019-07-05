@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
-
+import DescriptionUpdate from '../../mutations/admin/TourDescriptionUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,7 +15,9 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
-  const [description, setDescription] = useState('')
+  const { tour } = props
+
+  const [description, setDescription] = useState(tour.description)
 
   const [validation, setValidation] = useState({ isValid: false })
 
@@ -36,7 +39,16 @@ const Component = props => {
   const handleChange = ({ target: { value }}) => setDescription(value)
 
   const save = () => {
-    validate()
+    const validation = validate()
+    const variables = {
+      _id: tour.tourID,
+      description
+    }
+
+    if(validation.isValid) {
+      DescriptionUpdate(props.relay.environment, variables)
+      props.closeEdit()
+    }
   }
 
   return (
@@ -60,4 +72,11 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment DescriptionEdit_tour on Tour {
+      tourID,
+      description
+    }
+  `
+})

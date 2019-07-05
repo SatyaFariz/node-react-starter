@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import DescriptionEdit from './DescriptionEdit'
 
@@ -29,6 +30,8 @@ const Component = props => {
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
+  const { tour } = props
+
   return (
     <div 
       className={c.container}
@@ -42,11 +45,11 @@ const Component = props => {
       />
      
       {isEditing ?
-      <DescriptionEdit closeEdit={closeEdit}/>
+      <DescriptionEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div>
         <Typography>
-          Province: Test
+          {tour.description}
         </Typography>
       </div>
       }
@@ -54,4 +57,12 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment Description_tour on Tour {
+      id,
+      description,
+      ...DescriptionEdit_tour
+    }
+  `
+})

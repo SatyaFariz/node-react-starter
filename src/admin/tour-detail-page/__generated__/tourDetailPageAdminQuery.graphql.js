@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash aebc89b66ef38bc55405b0ceb7c74797
+ * @relayHash cbd0921b85a99f3ffb0af2c09a82aa2d
  */
 
 /* eslint-disable */
@@ -47,6 +47,18 @@ fragment Layout_loggedAdmin on LoggedAdmin {
 
 fragment TourDetailPage_tour on Tour {
   id
+  ...Description_tour
+}
+
+fragment Description_tour on Tour {
+  id
+  description
+  ...DescriptionEdit_tour
+}
+
+fragment DescriptionEdit_tour on Tour {
+  tourID
+  description
 }
 */
 
@@ -140,7 +152,21 @@ return {
             "concreteType": "Tour",
             "plural": false,
             "selections": [
-              (v2/*: any*/)
+              (v2/*: any*/),
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "description",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "tourID",
+                "args": null,
+                "storageKey": null
+              }
             ]
           }
         ]
@@ -151,7 +177,7 @@ return {
     "operationKind": "query",
     "name": "tourDetailPageAdminQuery",
     "id": null,
-    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n}\n",
+    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
     "metadata": {}
   }
 };

@@ -32,6 +32,8 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { tour } = props
+
   return (
     <div className={c.container}>
       <Typography variant="h2" gutterBottom className={c.title}>
@@ -40,7 +42,7 @@ const Component = props => {
 
       <div className={c.innerContainer}>
         <BasicInfo/>
-        <Description/>
+        <Description tour={tour}/>
         <WhatsIncluded/>
         <KidPrice/>
         <PackagePrice/>
@@ -58,7 +60,8 @@ const Component = props => {
 export default createFragmentContainer(Component, {
   tour: graphql`
     fragment TourDetailPage_tour on Tour {
-      id
+      id,
+      ...Description_tour
     }
   `
 })
