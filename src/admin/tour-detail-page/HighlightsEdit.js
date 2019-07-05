@@ -8,6 +8,7 @@ import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
+import HighlightsUpdate from '../../mutations/admin/TourHighlightsUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
-  const { tour } = props
+  const { closeEdit, tour, relay: { environment }} = props
 
   const [highlights, setHighlights] = useState([
     ...(tour.highlights || []),
@@ -44,7 +45,13 @@ const Component = props => {
   const add = () => setHighlights([...highlights, ''])
 
   const save = () => {
-    console.log(highlights)
+    const variables = {
+      _id: tour.tourID,
+      highlights: highlights.filter(item => item.trim() !== '')
+    }
+
+    HighlightsUpdate(environment, variables)
+    closeEdit()
   }
 
   return (
@@ -81,7 +88,7 @@ const Component = props => {
 
       <FormActionButtons
         onSaveButtonClick={save}
-        onCancelButtonClick={props.closeEdit}
+        onCancelButtonClick={closeEdit}
       />
     </div>
   )
