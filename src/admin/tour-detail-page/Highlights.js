@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import HighlightsEdit from './HighlightsEdit'
@@ -8,6 +9,13 @@ import HighlightsEdit from './HighlightsEdit'
 const useStyles = makeStyles(theme => ({
   container: {
 
+  },
+
+  addButtonContainer: {
+    padding: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: theme.palette.grey[100]
   }
 }))
 
@@ -32,6 +40,8 @@ const Component = props => {
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
+  const highlights = tour.highlights || []
+
   return (
     <div 
       className={c.container}
@@ -48,12 +58,27 @@ const Component = props => {
       <HighlightsEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div>
-        <Typography>
-          - dkfjajsdlfjklasdf dskfja  dsfajlksdfj a sdfkjasdklfj  safdjalskfj
-        </Typography>
-        <Typography>
-          - ksdjf ksjflasd f dklfjalds  dfjalsdf sdfj asfd
-        </Typography>
+        {highlights.length > 0 ?
+          <div>
+            {highlights.map((item, i) => {
+              return (
+                <Typography key={i}>
+                  - {item}
+                </Typography>
+              )
+            })}
+          </div>
+          :
+          <div className={c.addButtonContainer}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={openEdit}
+            >
+              Add
+            </Button>
+          </div>
+        }
       </div>
       }
     </div>
