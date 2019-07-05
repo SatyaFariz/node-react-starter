@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4fece9af46dfe1171fd13148ca25641a
+ * @relayHash a5530727ec4df0c612ae4b0f987fead5
  */
 
 /* eslint-disable */
@@ -51,6 +51,7 @@ fragment TourDetailPage_tour on Tour {
   ...BasicInfo_tour
   ...WhatsIncluded_tour
   ...KidPrice_tour
+  ...PackagePrice_tour
 }
 
 fragment Description_tour on Tour {
@@ -90,6 +91,23 @@ fragment KidPrice_tour on Tour {
     age_description
   }
   ...KidPriceEdit_tour
+}
+
+fragment PackagePrice_tour on Tour {
+  id
+  package_price {
+    price
+    number_of_people
+  }
+  ...PackagePriceEdit_tour
+}
+
+fragment PackagePriceEdit_tour on Tour {
+  tourID
+  package_price {
+    price
+    number_of_people
+  }
 }
 
 fragment KidPriceEdit_tour on Tour {
@@ -358,6 +376,31 @@ return {
                     "storageKey": null
                   }
                 ]
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "package_price",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "TourPackagePrice",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "price",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "number_of_people",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
               }
             ]
           }
@@ -369,7 +412,7 @@ return {
     "operationKind": "query",
     "name": "tourDetailPageAdminQuery",
     "id": null,
-    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n  ...BasicInfo_tour\n  ...WhatsIncluded_tour\n  ...KidPrice_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment BasicInfo_tour on Tour {\n  id\n  province\n  city\n  display_location\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n  ...BasicInfoEdit_tour\n}\n\nfragment WhatsIncluded_tour on Tour {\n  id\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n  ...WhatsIncludedEdit_tour\n}\n\nfragment KidPrice_tour on Tour {\n  id\n  kid_price {\n    price_per_person\n    age_description\n  }\n  ...KidPriceEdit_tour\n}\n\nfragment KidPriceEdit_tour on Tour {\n  tourID\n  kid_price {\n    price_per_person\n    age_description\n  }\n}\n\nfragment WhatsIncludedEdit_tour on Tour {\n  tourID\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n}\n\nfragment BasicInfoEdit_tour on Tour {\n  tourID\n  province\n  city\n  display_location\n  free_cancellation\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
+    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n  ...BasicInfo_tour\n  ...WhatsIncluded_tour\n  ...KidPrice_tour\n  ...PackagePrice_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment BasicInfo_tour on Tour {\n  id\n  province\n  city\n  display_location\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n  ...BasicInfoEdit_tour\n}\n\nfragment WhatsIncluded_tour on Tour {\n  id\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n  ...WhatsIncludedEdit_tour\n}\n\nfragment KidPrice_tour on Tour {\n  id\n  kid_price {\n    price_per_person\n    age_description\n  }\n  ...KidPriceEdit_tour\n}\n\nfragment PackagePrice_tour on Tour {\n  id\n  package_price {\n    price\n    number_of_people\n  }\n  ...PackagePriceEdit_tour\n}\n\nfragment PackagePriceEdit_tour on Tour {\n  tourID\n  package_price {\n    price\n    number_of_people\n  }\n}\n\nfragment KidPriceEdit_tour on Tour {\n  tourID\n  kid_price {\n    price_per_person\n    age_description\n  }\n}\n\nfragment WhatsIncludedEdit_tour on Tour {\n  tourID\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n}\n\nfragment BasicInfoEdit_tour on Tour {\n  tourID\n  province\n  city\n  display_location\n  free_cancellation\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
     "metadata": {}
   }
 };

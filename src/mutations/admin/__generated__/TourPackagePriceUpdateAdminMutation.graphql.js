@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c7996c5a001fecf6a78cd937b7cb7c4f
+ * @relayHash 5719ece44d5fa7002c0a02a2cfee17b8
  */
 
 /* eslint-disable */
@@ -14,7 +14,8 @@ export type TourPackagePriceInput = {|
   number_of_people: number,
 |};
 export type TourPackagePriceUpdateAdminMutationVariables = {|
-  package_price: TourPackagePriceInput
+  _id: string,
+  package_price: TourPackagePriceInput,
 |};
 export type TourPackagePriceUpdateAdminMutationResponse = {|
   +admin: ?{|
@@ -36,10 +37,11 @@ export type TourPackagePriceUpdateAdminMutation = {|
 
 /*
 mutation TourPackagePriceUpdateAdminMutation(
+  $_id: String!
   $package_price: TourPackagePriceInput!
 ) {
   admin {
-    tour_package_price_update(package_price: $package_price) {
+    tour_package_price_update(_id: $_id, package_price: $package_price) {
       id
       package_price {
         price
@@ -52,6 +54,12 @@ mutation TourPackagePriceUpdateAdminMutation(
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "_id",
+    "type": "String!",
+    "defaultValue": null
+  },
   {
     "kind": "LocalArgument",
     "name": "package_price",
@@ -75,6 +83,11 @@ v1 = [
         "name": "tour_package_price_update",
         "storageKey": null,
         "args": [
+          {
+            "kind": "Variable",
+            "name": "_id",
+            "variableName": "_id"
+          },
           {
             "kind": "Variable",
             "name": "package_price",
@@ -141,11 +154,11 @@ return {
     "operationKind": "mutation",
     "name": "TourPackagePriceUpdateAdminMutation",
     "id": null,
-    "text": "mutation TourPackagePriceUpdateAdminMutation(\n  $package_price: TourPackagePriceInput!\n) {\n  admin {\n    tour_package_price_update(package_price: $package_price) {\n      id\n      package_price {\n        price\n        number_of_people\n      }\n    }\n  }\n}\n",
+    "text": "mutation TourPackagePriceUpdateAdminMutation(\n  $_id: String!\n  $package_price: TourPackagePriceInput!\n) {\n  admin {\n    tour_package_price_update(_id: $_id, package_price: $package_price) {\n      id\n      package_price {\n        price\n        number_of_people\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '782bd0c79f8aa7b911a706598a1ceb8c';
+(node/*: any*/).hash = '80d21c626af182ba14d993b5fcc51643';
 module.exports = node;

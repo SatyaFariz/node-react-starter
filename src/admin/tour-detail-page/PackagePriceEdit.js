@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
+import PackagePriceUpdate from '../../mutations/admin/TourPackagePriceUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -13,9 +15,11 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { package_price, tourID } = props.tour
+
   const [input, setInput] = useState({
-    price: '',
-    number_of_people: ''
+    price: (package_price && package_price.price.toString()) || '',
+    number_of_people: (package_price && package_price.number_of_people.toString()) || ''
   })
 
   const [validation, setValidation] = useState({ isValid: false })
@@ -46,7 +50,20 @@ const Component = props => {
   }
 
   const save = () => {
-    validate()
+    const validation = validate()
+
+    if(validation.isValid) {
+      const variables = {
+        _id: tourID,
+        package_price: {
+          price: parseFloat(input.price, 10),
+          number_of_people: parseInt(input.number_of_people, 10)
+        }
+      }
+
+      PackagePriceUpdate(props.relay.environment, variables)
+      props.closeEdit()
+    }
   }
 
   return (
@@ -79,4 +96,14 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment PackagePriceEdit_tour on Tour {
+      tourID,
+      package_price {
+        price,
+        number_of_people
+      }
+    }
+  `
+})

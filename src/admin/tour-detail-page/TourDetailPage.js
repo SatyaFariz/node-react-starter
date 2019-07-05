@@ -45,7 +45,7 @@ const Component = props => {
         <Description tour={tour}/>
         <WhatsIncluded tour={tour}/>
         <KidPrice tour={tour}/>
-        <PackagePrice/>
+        <PackagePrice tour={tour}/>
         <Highlights/>
         <GuestRequirements/>
         <MoreTips/>
@@ -64,7 +64,8 @@ export default createFragmentContainer(Component, {
       ...Description_tour,
       ...BasicInfo_tour,
       ...WhatsIncluded_tour,
-      ...KidPrice_tour
+      ...KidPrice_tour,
+      ...PackagePrice_tour
     }
   `
 })

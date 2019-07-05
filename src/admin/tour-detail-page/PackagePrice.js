@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import PackagePriceEdit from './PackagePriceEdit'
 
@@ -12,6 +13,8 @@ const useStyles = makeStyles(theme => ({
 
 const Component = props => {
   const c = useStyles()
+
+  const { tour } = props
 
   const [isEditing, setEditing] = useState(false)
   const [editButtonVisible, setEditButtonVisible] = useState(false)
@@ -42,14 +45,14 @@ const Component = props => {
       />
 
       {isEditing ?
-      <PackagePriceEdit closeEdit={closeEdit}/>
+      <PackagePriceEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div>
         <Typography>
-          Price: Test
+          Price: {tour.package_price && tour.package_price.price}
         </Typography>
         <Typography>
-          Number of People: Test
+          Number of People: {tour.package_price && tour.package_price.number_of_people}
         </Typography>
       </div>
       }
@@ -57,4 +60,15 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment PackagePrice_tour on Tour {
+      id,
+      package_price {
+        price,
+        number_of_people
+      },
+      ...PackagePriceEdit_tour
+    }
+  `
+})
