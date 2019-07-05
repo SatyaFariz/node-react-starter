@@ -15,7 +15,7 @@ const Component = props => {
   const c = useStyles()
 
   return (
-    <div className={c.addButtonContainer}>
+    <div className={c.container}>
       <Button
         variant="contained"
         color="primary"

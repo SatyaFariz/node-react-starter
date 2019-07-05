@@ -1,21 +1,14 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import HighlightsEdit from './HighlightsEdit'
+import NoDataComponent from './NoDataComponent'
 
 const useStyles = makeStyles(theme => ({
   container: {
 
-  },
-
-  addButtonContainer: {
-    padding: 30,
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: theme.palette.grey[100]
   }
 }))
 
@@ -69,15 +62,7 @@ const Component = props => {
             })}
           </div>
           :
-          <div className={c.addButtonContainer}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={openEdit}
-            >
-              Add
-            </Button>
-          </div>
+          <NoDataComponent onAddButtonClick={openEdit}/>
         }
       </div>
       }
