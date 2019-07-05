@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import GuestRequirementsEdit from './GuestRequirementsEdit'
+import NoDataComponent from './NoDataComponent'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -32,6 +33,8 @@ const Component = props => {
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
+  const guest_requirements = tour.guest_requirements || []
+
   return (
     <div 
       className={c.container}
@@ -48,18 +51,19 @@ const Component = props => {
       <GuestRequirementsEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div>
-        <Typography>
-          - dlkfj lkdjafl dsjfal sadklfjsa dsf skdfjasl dsfaj lfksdjafd slkdfjas fdfa
-        </Typography>
-        <Typography>
-          - kldjfa kslkjaf d sdfklsajdlf  sdfkalsdjf sdlkfj assfd alskd jflsadjf s afdlsjf as
-        </Typography>
-        <Typography>
-          - dlkfj lkdjafl dsjfal sadklfjsa dsf skdfjasl dsfaj lfksdjafd slkdfjas fdfa
-        </Typography>
-        <Typography>
-          - kldjfa kslkjaf d sdfklsajdlf  sdfkalsdjf sdlkfj assfd alskd jflsadjf s afdlsjf as
-        </Typography>
+        {guest_requirements.length > 0 ?
+          <div>
+            {guest_requirements.map((item, i) => {
+              return (
+                <Typography key={i}>
+                  - {item}
+                </Typography>
+              )
+            })}
+          </div>
+          :
+          <NoDataComponent onAddButtonClick={openEdit}/>
+        }
       </div>
       }
     </div>
