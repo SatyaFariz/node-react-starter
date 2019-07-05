@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0199010fb4fb2e04ee1fc8abf23f92ae
+ * @relayHash 45655d3daef09963eac5210a6c5cbff0
  */
 
 /* eslint-disable */
@@ -18,7 +18,8 @@ export type TourWhatsIncludedInput = {|
   equipment_included?: ?string,
 |};
 export type TourWhatsIncludedUpdateAdminMutationVariables = {|
-  whats_included: TourWhatsIncludedInput
+  _id: string,
+  whats_included: TourWhatsIncludedInput,
 |};
 export type TourWhatsIncludedUpdateAdminMutationResponse = {|
   +admin: ?{|
@@ -42,10 +43,11 @@ export type TourWhatsIncludedUpdateAdminMutation = {|
 
 /*
 mutation TourWhatsIncludedUpdateAdminMutation(
+  $_id: String!
   $whats_included: TourWhatsIncludedInput!
 ) {
   admin {
-    tour_whats_included_update(whats_included: $whats_included) {
+    tour_whats_included_update(_id: $_id, whats_included: $whats_included) {
       id
       foods_included
       drinks_included
@@ -60,6 +62,12 @@ mutation TourWhatsIncludedUpdateAdminMutation(
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "_id",
+    "type": "String!",
+    "defaultValue": null
+  },
   {
     "kind": "LocalArgument",
     "name": "whats_included",
@@ -83,6 +91,11 @@ v1 = [
         "name": "tour_whats_included_update",
         "storageKey": null,
         "args": [
+          {
+            "kind": "Variable",
+            "name": "_id",
+            "variableName": "_id"
+          },
           {
             "kind": "Variable",
             "name": "whats_included",
@@ -166,11 +179,11 @@ return {
     "operationKind": "mutation",
     "name": "TourWhatsIncludedUpdateAdminMutation",
     "id": null,
-    "text": "mutation TourWhatsIncludedUpdateAdminMutation(\n  $whats_included: TourWhatsIncludedInput!\n) {\n  admin {\n    tour_whats_included_update(whats_included: $whats_included) {\n      id\n      foods_included\n      drinks_included\n      transportation_included\n      equipment_included\n      tickets_included\n      accomodations_included\n    }\n  }\n}\n",
+    "text": "mutation TourWhatsIncludedUpdateAdminMutation(\n  $_id: String!\n  $whats_included: TourWhatsIncludedInput!\n) {\n  admin {\n    tour_whats_included_update(_id: $_id, whats_included: $whats_included) {\n      id\n      foods_included\n      drinks_included\n      transportation_included\n      equipment_included\n      tickets_included\n      accomodations_included\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b2a97be9abb1fed6fcae6c5d41e41b47';
+(node/*: any*/).hash = '90ac43eb1fb2362893d3f69c4e50da40';
 module.exports = node;

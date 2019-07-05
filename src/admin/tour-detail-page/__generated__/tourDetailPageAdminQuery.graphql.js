@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fb62e3c9857772c87b9012c5e42dca65
+ * @relayHash f2375870115534a3a30a8c07dfe289ea
  */
 
 /* eslint-disable */
@@ -49,6 +49,7 @@ fragment TourDetailPage_tour on Tour {
   id
   ...Description_tour
   ...BasicInfo_tour
+  ...WhatsIncluded_tour
 }
 
 fragment Description_tour on Tour {
@@ -68,6 +69,27 @@ fragment BasicInfo_tour on Tour {
   price_per_person
   good_for
   ...BasicInfoEdit_tour
+}
+
+fragment WhatsIncluded_tour on Tour {
+  id
+  foods_included
+  drinks_included
+  accomodations_included
+  tickets_included
+  transportation_included
+  equipment_included
+  ...WhatsIncludedEdit_tour
+}
+
+fragment WhatsIncludedEdit_tour on Tour {
+  tourID
+  foods_included
+  drinks_included
+  accomodations_included
+  tickets_included
+  transportation_included
+  equipment_included
 }
 
 fragment BasicInfoEdit_tour on Tour {
@@ -256,6 +278,48 @@ return {
                 "name": "free_cancellation",
                 "args": null,
                 "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "foods_included",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "drinks_included",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "accomodations_included",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "tickets_included",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "transportation_included",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "equipment_included",
+                "args": null,
+                "storageKey": null
               }
             ]
           }
@@ -267,7 +331,7 @@ return {
     "operationKind": "query",
     "name": "tourDetailPageAdminQuery",
     "id": null,
-    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n  ...BasicInfo_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment BasicInfo_tour on Tour {\n  id\n  province\n  city\n  display_location\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n  ...BasicInfoEdit_tour\n}\n\nfragment BasicInfoEdit_tour on Tour {\n  tourID\n  province\n  city\n  display_location\n  free_cancellation\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
+    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n  ...BasicInfo_tour\n  ...WhatsIncluded_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment BasicInfo_tour on Tour {\n  id\n  province\n  city\n  display_location\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n  ...BasicInfoEdit_tour\n}\n\nfragment WhatsIncluded_tour on Tour {\n  id\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n  ...WhatsIncludedEdit_tour\n}\n\nfragment WhatsIncludedEdit_tour on Tour {\n  tourID\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n}\n\nfragment BasicInfoEdit_tour on Tour {\n  tourID\n  province\n  city\n  display_location\n  free_cancellation\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
     "metadata": {}
   }
 };

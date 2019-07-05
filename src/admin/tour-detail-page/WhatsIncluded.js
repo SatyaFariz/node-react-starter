@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import WhatsIncludedEdit from './WhatsIncludedEdit'
 
@@ -29,6 +30,8 @@ const Component = props => {
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
+  const { tour } = props
+
   return (
     <div 
       className={c.container}
@@ -42,26 +45,26 @@ const Component = props => {
       />
 
       {isEditing ?
-      <WhatsIncludedEdit closeEdit={closeEdit}/>
+      <WhatsIncludedEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div>
         <Typography>
-          Foods: Test
+          Foods: {tour.foods_included}
         </Typography>
         <Typography>
-          Drinks: Test
+          Drinks: {tour.drinks_included}
         </Typography>
         <Typography>
-          Accomodations: Test
+          Accomodations: {tour.accomodations_included}
         </Typography>
         <Typography>
-          Tickets: Test
+          Tickets: {tour.tickets_included}
         </Typography>
         <Typography>
-          Transportation: -
+          Transportation: {tour.transportation_included}
         </Typography>
         <Typography>
-          Equipment: 2 Days
+          Equipment: {tour.equipment_included}
         </Typography>
       </div>
       }
@@ -69,4 +72,17 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment WhatsIncluded_tour on Tour {
+      id,
+      foods_included,
+      drinks_included,
+      accomodations_included,
+      tickets_included,
+      transportation_included,
+      equipment_included,
+      ...WhatsIncludedEdit_tour
+    }
+  `
+})

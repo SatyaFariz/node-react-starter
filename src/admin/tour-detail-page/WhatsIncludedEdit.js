@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import { graphql, createFragmentContainer } from 'react-relay'
 import FormActionButtons from './FormActionButtons'
+import WhatsIncludedUpdate from '../../mutations/admin/TourWhatsIncludedUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -12,13 +14,15 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { tour, closeEdit, relay: { environment }} = props
+
   const [input, setInput] = useState({
-    foods_included: '',
-    drinks_included: '',
-    accomodations_included: '',
-    tickets_included: '',
-    transportation_included: '',
-    equipment_included: '',
+    foods_included: tour.foods_included || '',
+    drinks_included: tour.drinks_included || '',
+    accomodations_included: tour.accomodations_included || '',
+    tickets_included: tour.tickets_included || '',
+    transportation_included: tour.transportation_included || '',
+    equipment_included: tour.equipment_included || '',
   })
 
   const handleChange = name => event => {
@@ -26,7 +30,13 @@ const Component = props => {
   }
 
   const save = () => {
-    console.log('')
+    const variables = {
+      _id: tour.tourID,
+      whats_included: input
+    }
+
+    WhatsIncludedUpdate(environment, variables)
+    closeEdit()
   }
 
   return (
@@ -81,10 +91,22 @@ const Component = props => {
 
       <FormActionButtons
         onSaveButtonClick={save}
-        onCancelButtonClick={props.closeEdit}
+        onCancelButtonClick={closeEdit}
       />
     </div>
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment WhatsIncludedEdit_tour on Tour {
+      tourID,
+      foods_included,
+      drinks_included,
+      accomodations_included,
+      tickets_included,
+      transportation_included,
+      equipment_included,
+    }
+  `
+})

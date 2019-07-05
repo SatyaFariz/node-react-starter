@@ -43,7 +43,7 @@ const Component = props => {
       <div className={c.innerContainer}>
         <BasicInfo tour={tour}/>
         <Description tour={tour}/>
-        <WhatsIncluded/>
+        <WhatsIncluded tour={tour}/>
         <KidPrice/>
         <PackagePrice/>
         <Highlights/>
@@ -62,7 +62,8 @@ export default createFragmentContainer(Component, {
     fragment TourDetailPage_tour on Tour {
       id,
       ...Description_tour,
-      ...BasicInfo_tour
+      ...BasicInfo_tour,
+      ...WhatsIncluded_tour
     }
   `
 })
