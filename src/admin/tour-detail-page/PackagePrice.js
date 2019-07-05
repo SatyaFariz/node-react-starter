@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import PackagePriceEdit from './PackagePriceEdit'
+import PackagePriceDelete from '../../mutations/admin/TourPackagePriceDelete'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -18,6 +19,7 @@ const Component = props => {
 
   const [isEditing, setEditing] = useState(false)
   const [editButtonVisible, setEditButtonVisible] = useState(false)
+  const [deleteButtonVisible, setDeleteButtonVisible] = useState(false)
 
   const closeEdit = () => {
     setEditing(false)
@@ -25,6 +27,7 @@ const Component = props => {
 
   const openEdit = () => {
     setEditButtonVisible(false)
+    setDeleteButtonVisible(false)
     setEditing(true)
   }
 
@@ -32,16 +35,43 @@ const Component = props => {
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
+  const showDeleteButton = () => !isEditing && !deleteButtonVisible && setDeleteButtonVisible(true)
+
+  const hideDeleteButton = () => !isEditing && deleteButtonVisible && setDeleteButtonVisible(false)
+
+  const handleMouseOver = () => {
+    showEditButton()
+    if(tour.package_price)
+      showDeleteButton()
+  }
+
+  const handleMouseLeave = () => {
+    hideEditButton()
+    if(tour.package_price)
+      hideDeleteButton()
+  }
+
+  const deletePackagePrice = () => {
+    PackagePriceDelete(props.relay.environment, { _id: tour.id }, (payload, err) => {
+      if(err)
+      showDeleteButton()
+    })
+    
+    hideDeleteButton()
+  }
+
   return (
     <div 
       className={c.container}
-      onMouseOver={showEditButton}
-      onMouseLeave={hideEditButton}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
       <SectionHeader 
         title="Package Price" 
+        onDeleteButtonClick={deletePackagePrice}
         onEditButtonClick={openEdit}
         showEditButton={editButtonVisible}
+        showDeleteButton={deleteButtonVisible}
       />
 
       {isEditing ?
