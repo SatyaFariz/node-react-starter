@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import GuestRequirementsEdit from './GuestRequirementsEdit'
 
@@ -12,6 +13,8 @@ const useStyles = makeStyles(theme => ({
 
 const Component = props => {
   const c = useStyles()
+
+  const { tour } = props
 
   const [isEditing, setEditing] = useState(false)
   const [editButtonVisible, setEditButtonVisible] = useState(false)
@@ -42,7 +45,7 @@ const Component = props => {
       />
 
       {isEditing ?
-      <GuestRequirementsEdit closeEdit={closeEdit}/>
+      <GuestRequirementsEdit closeEdit={closeEdit} tour={tour}/>
       :
       <div>
         <Typography>
@@ -63,4 +66,12 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment GuestRequirements_tour on Tour {
+      id,
+      guest_requirements,
+      ...GuestRequirementsEdit_tour
+    }
+  `
+})

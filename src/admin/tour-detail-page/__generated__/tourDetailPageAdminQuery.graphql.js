@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 71238b2227387ce9c3540aad829b3c17
+ * @relayHash 4bb7f4e5fe451d62db3eb2ce828dec11
  */
 
 /* eslint-disable */
@@ -53,6 +53,7 @@ fragment TourDetailPage_tour on Tour {
   ...KidPrice_tour
   ...PackagePrice_tour
   ...Highlights_tour
+  ...GuestRequirements_tour
 }
 
 fragment Description_tour on Tour {
@@ -107,6 +108,17 @@ fragment Highlights_tour on Tour {
   id
   highlights
   ...HighlightsEdit_tour
+}
+
+fragment GuestRequirements_tour on Tour {
+  id
+  guest_requirements
+  ...GuestRequirementsEdit_tour
+}
+
+fragment GuestRequirementsEdit_tour on Tour {
+  tourID
+  guest_requirements
 }
 
 fragment HighlightsEdit_tour on Tour {
@@ -420,6 +432,13 @@ return {
                 "name": "highlights",
                 "args": null,
                 "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "guest_requirements",
+                "args": null,
+                "storageKey": null
               }
             ]
           }
@@ -431,7 +450,7 @@ return {
     "operationKind": "query",
     "name": "tourDetailPageAdminQuery",
     "id": null,
-    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n  ...BasicInfo_tour\n  ...WhatsIncluded_tour\n  ...KidPrice_tour\n  ...PackagePrice_tour\n  ...Highlights_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment BasicInfo_tour on Tour {\n  id\n  province\n  city\n  display_location\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n  ...BasicInfoEdit_tour\n}\n\nfragment WhatsIncluded_tour on Tour {\n  id\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n  ...WhatsIncludedEdit_tour\n}\n\nfragment KidPrice_tour on Tour {\n  id\n  kid_price {\n    price_per_person\n    age_description\n  }\n  ...KidPriceEdit_tour\n}\n\nfragment PackagePrice_tour on Tour {\n  id\n  package_price {\n    price\n    number_of_people\n  }\n  ...PackagePriceEdit_tour\n}\n\nfragment Highlights_tour on Tour {\n  id\n  highlights\n  ...HighlightsEdit_tour\n}\n\nfragment HighlightsEdit_tour on Tour {\n  tourID\n  highlights\n}\n\nfragment PackagePriceEdit_tour on Tour {\n  tourID\n  package_price {\n    price\n    number_of_people\n  }\n}\n\nfragment KidPriceEdit_tour on Tour {\n  tourID\n  kid_price {\n    price_per_person\n    age_description\n  }\n}\n\nfragment WhatsIncludedEdit_tour on Tour {\n  tourID\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n}\n\nfragment BasicInfoEdit_tour on Tour {\n  tourID\n  province\n  city\n  display_location\n  free_cancellation\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
+    "text": "query tourDetailPageAdminQuery(\n  $tourID: String!\n) {\n  logged_admin {\n    ...Layout_loggedAdmin\n    tour(tourID: $tourID) {\n      ...TourDetailPage_tour\n    }\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment TourDetailPage_tour on Tour {\n  id\n  ...Description_tour\n  ...BasicInfo_tour\n  ...WhatsIncluded_tour\n  ...KidPrice_tour\n  ...PackagePrice_tour\n  ...Highlights_tour\n  ...GuestRequirements_tour\n}\n\nfragment Description_tour on Tour {\n  id\n  description\n  ...DescriptionEdit_tour\n}\n\nfragment BasicInfo_tour on Tour {\n  id\n  province\n  city\n  display_location\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n  ...BasicInfoEdit_tour\n}\n\nfragment WhatsIncluded_tour on Tour {\n  id\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n  ...WhatsIncludedEdit_tour\n}\n\nfragment KidPrice_tour on Tour {\n  id\n  kid_price {\n    price_per_person\n    age_description\n  }\n  ...KidPriceEdit_tour\n}\n\nfragment PackagePrice_tour on Tour {\n  id\n  package_price {\n    price\n    number_of_people\n  }\n  ...PackagePriceEdit_tour\n}\n\nfragment Highlights_tour on Tour {\n  id\n  highlights\n  ...HighlightsEdit_tour\n}\n\nfragment GuestRequirements_tour on Tour {\n  id\n  guest_requirements\n  ...GuestRequirementsEdit_tour\n}\n\nfragment GuestRequirementsEdit_tour on Tour {\n  tourID\n  guest_requirements\n}\n\nfragment HighlightsEdit_tour on Tour {\n  tourID\n  highlights\n}\n\nfragment PackagePriceEdit_tour on Tour {\n  tourID\n  package_price {\n    price\n    number_of_people\n  }\n}\n\nfragment KidPriceEdit_tour on Tour {\n  tourID\n  kid_price {\n    price_per_person\n    age_description\n  }\n}\n\nfragment WhatsIncludedEdit_tour on Tour {\n  tourID\n  foods_included\n  drinks_included\n  accomodations_included\n  tickets_included\n  transportation_included\n  equipment_included\n}\n\nfragment BasicInfoEdit_tour on Tour {\n  tourID\n  province\n  city\n  display_location\n  free_cancellation\n  name\n  category\n  duration_in_days\n  price_per_person\n  good_for\n}\n\nfragment DescriptionEdit_tour on Tour {\n  tourID\n  description\n}\n",
     "metadata": {}
   }
 };
