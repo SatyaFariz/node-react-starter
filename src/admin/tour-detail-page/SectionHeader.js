@@ -26,17 +26,19 @@ const Component = props => {
         {props.title}
       </Typography>
     
-      {props.showEditButton &&
-      <IconButton onClick={props.onEditButtonClick}>
-        <EditButton size="small"/>
-      </IconButton>
-      }
+      <div>
+        {props.showEditButton &&
+        <IconButton onClick={props.onEditButtonClick}>
+          <EditButton size="small"/>
+        </IconButton>
+        }
 
-      {props.showDeleteButton &&
-      <IconButton onClick={props.onDeleteButtonClick} className={c.deleteButton}>
-        <DeleteButton size="small"/>
-      </IconButton>
-      }
+        {props.showDeleteButton &&
+        <IconButton onClick={props.onDeleteButtonClick} className={c.deleteButton}>
+          <DeleteButton size="small"/>
+        </IconButton>
+        }
+      </div>
     </div>
   )
 }
