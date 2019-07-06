@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Fri Jul 05 2019 12:41:13 GMT+0700 (SE Asia Standard Time)
+# timestamp: Sun Jul 07 2019 02:28:31 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -37,6 +37,17 @@ type AdminMutation {
   tour_kid_price_delete(_id: String!): Tour
   tour_package_price_update(_id: String!, package_price: TourPackagePriceInput!): Tour
   tour_package_price_delete(_id: String!): Tour
+  tour_location_update(_id: String!, location: CoordinateInput!, location_details: String): Tour
+}
+
+type Coordinate {
+  lat: Float
+  lng: Float
+}
+
+input CoordinateInput {
+  lat: Float!
+  lng: Float!
 }
 
 """
@@ -130,6 +141,7 @@ type Tour {
   transportation_included: String
   equipment_included: String
   good_for: String
+  location: Coordinate
   location_details: String
   next_available_dates: [Int]
   highlights: [String]
