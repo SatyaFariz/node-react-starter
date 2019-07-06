@@ -10,6 +10,7 @@ const {
 const Image = require('./Image')
 const TourKidPrice = require('./TourKidPrice')
 const TourPackagePrice = require('./TourPackagePrice')
+const Coordinate = require('./Coordinate')
 
 module.exports = new GraphQLObjectType({
   name: 'Tour',
@@ -94,6 +95,10 @@ module.exports = new GraphQLObjectType({
 
     good_for: {
       type: GraphQLString
+    },
+
+    location: {
+      type: Coordinate
     },
 
     location_details: {
