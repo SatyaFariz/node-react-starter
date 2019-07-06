@@ -13,6 +13,7 @@ import GuestRequirements from './GuestRequirements'
 import MoreTips from './MoreTips'
 import TermsAndConditions from './TermsAndConditions'
 import CancellationPolicy from './CancellationPolicy'
+import MapsAndLocationDetails from './MapsAndLocationDetails'
 import Itinerary from './Itinerary'
 
 const useStyles = makeStyles(theme => ({
@@ -51,6 +52,7 @@ const Component = props => {
         <MoreTips tour={tour}/>
         <TermsAndConditions tour={tour}/>
         <CancellationPolicy tour={tour}/>
+        <MapsAndLocationDetails/>
         <Itinerary/>
       </div>
     </div>
