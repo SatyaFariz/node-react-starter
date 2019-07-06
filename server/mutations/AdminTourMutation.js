@@ -12,6 +12,7 @@ const TourWhatsIncludedInput = require('../model/input/TourWhatsIncludedInput')
 const TourBasicInfoInput = require('../model/input/TourBasicInfoInput')
 const TourKidPriceInput = require('../model/input/TourKidPriceInput')
 const TourPackagePriceInput = require('../model/input/TourPackagePriceInput')
+const CoordinateInput = require('../model/input/CoordinateInput')
 const adminTourCreate = require('../utils/mutation-resolvers/adminTourCreate')
 const adminTourVisibilityUpdate = require('../utils/mutation-resolvers/adminTourVisibilityUpdate')
 const adminTourHighlightsUpdate = require('../utils/mutation-resolvers/adminTourHighlightsUpdate')
@@ -29,6 +30,7 @@ const adminTourKidPriceDelete = require('../utils/mutation-resolvers/adminTourKi
 const adminTourPackagePriceUpdate = require('../utils/mutation-resolvers/adminTourPackagePriceUpdate')
 const adminTourPackagePriceDelete = require('../utils/mutation-resolvers/adminTourPackagePriceDelete')
 const adminTourDescriptionUpdate = require('../utils/mutation-resolvers/adminTourDescriptionUpdate')
+const adminTourLocationUpdate = require('../utils/mutation-resolvers/adminTourLocationUpdate')
 
 module.exports = {
   tour_create: {
@@ -185,5 +187,15 @@ module.exports = {
       _id: { type: new GraphQLNonNull(GraphQLString) }
     },
     resolve: adminTourPackagePriceDelete
+  },
+
+  tour_location_update: {
+    type: Tour,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) },
+      location: { type: new GraphQLNonNull(CoordinateInput) },
+      location_details: { type: GraphQLString },
+    },
+    resolve: adminTourLocationUpdate
   }
 }
