@@ -25,14 +25,18 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const defaultCenter = { lat: 40.730610, lng: -73.935242 }
+
   const [isEditing, setEditing] = useState(false)
   const [editButtonVisible, setEditButtonVisible] = useState(false)
+  const [center, setCenter] = useState(defaultCenter)
 /*
   const closeEdit = () => {
     setEditing(false)
   }*/
 
   const openEdit = () => {
+    setCenter(defaultCenter)
     setEditButtonVisible(false)
     setEditing(true)
   }
@@ -40,11 +44,6 @@ const Component = props => {
   const showEditButton = () => !isEditing && !editButtonVisible && setEditButtonVisible(true)
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
-
-  const center = {
-    lng: -73.935242,
-    lat: 40.730610
-  }
 
   return (
     <div 
@@ -60,11 +59,11 @@ const Component = props => {
 
       <div>
         <GoogleMapComponent
-          onDblClick={() => console.log('')}
-       //   markerDraggable={!isLoading}
+          setCenter={setCenter}
+          markerDraggable={isEditing}
           center={center}
-          onMarkerDragEnd={() => console.log('')}
-          isMarkerShown
+          showMarker={isEditing}
+          showSearchBox={isEditing}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMs9PzMrbSGJrhIIqJBZ7YZxkSDzgJuBM&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div className={c.loadingElement}/>}
           containerElement={<div className={c.mapContainer} />}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import SearchBox from "react-google-maps/lib/components/places/SearchBox"
@@ -25,26 +25,46 @@ const Component = props => {
   const {
     center,
     markerDraggable,
-    isMarkerShown,
-    onMarkerDragEnd,
-    onDblClick
+    showMarker,
+    showSearchBox
   } = props
+
+  const searchBoxRef = useRef(null)
+
+  const handlePlacesChanged = () => {
+    const places = searchBoxRef.current.getPlaces()
+    if(places.length > 0) {
+      const { location } = places[0].geometry
+      props.setCenter({ lat: location.lat(), lng: location.lng() })
+    }
+  }
+
+  const setCenter = (obj) => {
+    const { lat, lng } = obj.latLng
+
+    const location = {
+      lat: lat(),
+      lng: lng()
+    }
+
+    props.setCenter(location)
+  }
 
   return (
     <GoogleMap
       options={{
         disableDoubleClickZoom: true
       }}
-      onDblClick={onDblClick}
+      onDblClick={setCenter}
       defaultZoom={17}
       defaultCenter={center}
       center={center}
     >
+      {showSearchBox &&
       <SearchBox
-      //  ref={props.onSearchBoxMounted}
-      //  bounds={props.bounds}
+        ref={searchBoxRef}
         controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
-      //  onPlacesChanged={props.onPlacesChanged}
+        onPlacesChanged={handlePlacesChanged}
       >
         <input
           type="text"
@@ -52,11 +72,13 @@ const Component = props => {
           className={c.input}
         />
       </SearchBox>
-      {isMarkerShown && 
+      }
+      
+      {showMarker && 
         <Marker 
           draggable={markerDraggable}
           position={center} 
-          onDragEnd={onMarkerDragEnd}
+          onDragEnd={setCenter}
         />
       }
     </GoogleMap>
