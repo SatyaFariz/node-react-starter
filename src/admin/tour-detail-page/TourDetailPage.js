@@ -49,7 +49,7 @@ const Component = props => {
         <Highlights tour={tour}/>
         <GuestRequirements tour={tour}/>
         <MoreTips tour={tour}/>
-        <TermsAndConditions/>
+        <TermsAndConditions tour={tour}/>
         <CancellationPolicy/>
         <Itinerary/>
       </div>
@@ -68,7 +68,8 @@ export default createFragmentContainer(Component, {
       ...PackagePrice_tour,
       ...Highlights_tour,
       ...GuestRequirements_tour,
-      ...MoreTips_tour
+      ...MoreTips_tour,
+      ...TermsAndConditions_tour
     }
   `
 })
