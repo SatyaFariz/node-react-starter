@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
   innerContainer: {
     display: 'grid',
-    gridGap: '20px'
+    gridGap: '40px'
   },
   title: {
     fontSize: 50
