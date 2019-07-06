@@ -9,6 +9,12 @@ import NoDataComponent from './NoDataComponent'
 const useStyles = makeStyles(theme => ({
   container: {
 
+  },
+
+  list: {
+    display: 'grid',
+    gridGap: '10px',
+    margin: 0
   }
 }))
 
@@ -52,15 +58,17 @@ const Component = props => {
       :
       <div>
         {highlights.length > 0 ?
-          <div>
+          <ul className={c.list}>
             {highlights.map((item, i) => {
               return (
-                <Typography key={i}>
-                  - {item}
-                </Typography>
+                <li key={i}>
+                  <Typography>
+                    {item}
+                  </Typography>
+                </li>
               )
             })}
-          </div>
+          </ul>
           :
           <NoDataComponent onAddButtonClick={openEdit}/>
         }
