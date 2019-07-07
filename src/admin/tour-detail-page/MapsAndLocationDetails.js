@@ -82,7 +82,7 @@ const Component = props => {
       }
     })
 
-    closeEdit()
+    setEditing(false)
   }
 
   const _setCenter = (center) => {
