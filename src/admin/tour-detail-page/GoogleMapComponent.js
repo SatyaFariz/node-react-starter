@@ -27,7 +27,8 @@ const Component = props => {
     markerDraggable,
     showMarker,
     showSearchBox,
-    draggable
+    draggable,
+    innerRef
   } = props
 
   const searchBoxRef = useRef(null)
@@ -53,6 +54,7 @@ const Component = props => {
 
   return (
     <GoogleMap
+      ref={innerRef}
       options={{
         disableDoubleClickZoom: true,
         draggable: draggable,

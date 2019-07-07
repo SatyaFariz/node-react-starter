@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@material-ui/core/TextField'
@@ -35,6 +35,8 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const mapRef = useRef(null)
+
   const { id, location_details, location } = props.tour
 
   const defaultCenter = location || { lat: 40.730610, lng: -73.935242 }
@@ -45,6 +47,7 @@ const Component = props => {
   const [locationDetails, setLocationDetails] = useState(location_details || '')
 
   const closeEdit = () => {
+    mapRef.current.panTo(location || defaultCenter)
     setCenter(location || defaultCenter)
     setEditing(false)
   }
@@ -108,6 +111,7 @@ const Component = props => {
 
       <div>
         <GoogleMapComponent
+          innerRef={mapRef}
           setCenter={_setCenter}
           markerDraggable={isEditing}
           center={center}
