@@ -55,7 +55,8 @@ const Component = props => {
     <GoogleMap
       options={{
         disableDoubleClickZoom: true,
-        draggable: draggable
+        draggable: draggable,
+        draggableCursor: draggable ? undefined : 'default' 
       }}
       onDblClick={setCenter}
       defaultZoom={17}
