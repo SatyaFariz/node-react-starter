@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { graphql, createFragmentContainer } from 'react-relay'
 import SectionHeader from './SectionHeader'
 import GoogleMapComponent from './GoogleMapComponent'
 
@@ -74,4 +75,15 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment MapsAndLocationDetails_tour on Tour {
+      id,
+      location_details,
+      location {
+        lat,
+        lng
+      }
+    }
+  `
+})

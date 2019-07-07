@@ -14,6 +14,7 @@ type Description_tour$ref = any;
 type GuestRequirements_tour$ref = any;
 type Highlights_tour$ref = any;
 type KidPrice_tour$ref = any;
+type MapsAndLocationDetails_tour$ref = any;
 type MoreTips_tour$ref = any;
 type PackagePrice_tour$ref = any;
 type TermsAndConditions_tour$ref = any;
@@ -23,7 +24,7 @@ declare export opaque type TourDetailPage_tour$ref: FragmentReference;
 declare export opaque type TourDetailPage_tour$fragmentType: TourDetailPage_tour$ref;
 export type TourDetailPage_tour = {|
   +id: ?string,
-  +$fragmentRefs: Description_tour$ref & BasicInfo_tour$ref & WhatsIncluded_tour$ref & KidPrice_tour$ref & PackagePrice_tour$ref & Highlights_tour$ref & GuestRequirements_tour$ref & MoreTips_tour$ref & TermsAndConditions_tour$ref & CancellationPolicy_tour$ref,
+  +$fragmentRefs: Description_tour$ref & BasicInfo_tour$ref & WhatsIncluded_tour$ref & KidPrice_tour$ref & PackagePrice_tour$ref & Highlights_tour$ref & GuestRequirements_tour$ref & MoreTips_tour$ref & TermsAndConditions_tour$ref & CancellationPolicy_tour$ref & MapsAndLocationDetails_tour$ref,
   +$refType: TourDetailPage_tour$ref,
 |};
 export type TourDetailPage_tour$data = TourDetailPage_tour;
@@ -97,9 +98,14 @@ const node/*: ReaderFragment*/ = {
       "kind": "FragmentSpread",
       "name": "CancellationPolicy_tour",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "MapsAndLocationDetails_tour",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'e7a5377852163c8cd1ce5d015f8419f5';
+(node/*: any*/).hash = 'a25de5b9bcda3c311817f5a6501e74c2';
 module.exports = node;

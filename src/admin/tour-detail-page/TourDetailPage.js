@@ -72,7 +72,8 @@ export default createFragmentContainer(Component, {
       ...GuestRequirements_tour,
       ...MoreTips_tour,
       ...TermsAndConditions_tour,
-      ...CancellationPolicy_tour
+      ...CancellationPolicy_tour,
+      ...MapsAndLocationDetails_tour
     }
   `
 })
