@@ -20,6 +20,7 @@ export default (environment, variables, callback) => {
     admin: {
       tour_location_update: {
         id: variables._id,
+        location_details: variables.location_details,
         location: variables.location
       }
     }

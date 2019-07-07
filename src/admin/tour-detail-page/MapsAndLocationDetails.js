@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import SectionHeader from './SectionHeader'
 import GoogleMapComponent from './GoogleMapComponent'
 import FormActionButtons from './FormActionButtons'
@@ -29,6 +30,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     marginTop: 10
+  },
+
+  locationDetails: {
+    marginTop: 20
   }
 }))
 
@@ -133,13 +138,14 @@ const Component = props => {
           </span>
         </div>
 
-        {isEditing &&
+        {isEditing ?
         <div>
           <TextField
             label="Location Details"
             value={locationDetails}
             onChange={handleChange}
             margin="normal"
+            multiline
             fullWidth
           />
 
@@ -148,6 +154,15 @@ const Component = props => {
             onCancelButtonClick={closeEdit}
           />
         </div>
+        :
+        <React.Fragment>
+          {location_details &&
+            <div className={c.locationDetails}>
+              <Typography variant="h6" gutterBottom>Location Details</Typography>
+              <Typography>{location_details}</Typography>
+            </div>
+          }
+        </React.Fragment>
         }
 
       </div>
