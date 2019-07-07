@@ -52,7 +52,7 @@ const Component = props => {
         <MoreTips tour={tour}/>
         <TermsAndConditions tour={tour}/>
         <CancellationPolicy tour={tour}/>
-        <MapsAndLocationDetails/>
+        <MapsAndLocationDetails tour={tour}/>
         <Itinerary/>
       </div>
     </div>

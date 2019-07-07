@@ -26,7 +26,8 @@ const Component = props => {
     center,
     markerDraggable,
     showMarker,
-    showSearchBox
+    showSearchBox,
+    draggable
   } = props
 
   const searchBoxRef = useRef(null)
@@ -53,7 +54,8 @@ const Component = props => {
   return (
     <GoogleMap
       options={{
-        disableDoubleClickZoom: true
+        disableDoubleClickZoom: true,
+        draggable: draggable
       }}
       onDblClick={setCenter}
       defaultZoom={17}
