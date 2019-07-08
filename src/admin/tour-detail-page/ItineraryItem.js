@@ -14,11 +14,17 @@ const useStyles = makeStyles(theme => ({
 
   header: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'relative'
   },
 
   deleteButton: {
     marginLeft: theme.spacing(1)
+  },
+
+  buttonsContainer: {
+    position: 'absolute',
+    right: 0
   }
 }))
 
@@ -26,8 +32,26 @@ const Component = props => {
   const c = useStyles()
 
   const [isEditing, setEditing] = useState(false)
+  const [editButtonVisible, setEditButtonVisible] = useState(false)
+  const [deleteButtonVisible, setDeleteButtonVisible] = useState(false)
+
+  const handleMouseOver = () => {
+    setDeleteButtonVisible(true)
+    setEditButtonVisible(true)
+  }
+
+  const handleMouseLeave = () => {
+    setDeleteButtonVisible(false)
+    setEditButtonVisible(false)
+  }
 
   const closeEdit = () => setEditing(false)
+
+  const openEdit = () => {
+    setEditing(true)
+    setDeleteButtonVisible(false)
+    setEditButtonVisible(false)
+  }
 
   const { itinerary } = props
 
@@ -38,22 +62,32 @@ const Component = props => {
   }
 
   return (
-    <div className={c.container}>
+    <div 
+      className={c.container}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+    >
 
       <div className={c.header}>
         <Typography variant="h5" gutterBottom>{itinerary.time_description}</Typography>
-        <div>
+
+        <div className={c.buttonsContainer}>          
+          {editButtonVisible &&
           <IconButton
-            onClick={() => setEditing(true)}
+            onClick={openEdit}
           >
             <EditIcon fontSize="small"/>
           </IconButton>
+          }
+
+          {deleteButtonVisible &&
           <IconButton
             onClick={() => console.log('')}
             className={c.deleteButton}
           >
             <DeleteIcon fontSize="small"/>
           </IconButton>
+          }          
         </div>
       </div>
 
