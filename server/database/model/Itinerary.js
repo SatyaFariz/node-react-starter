@@ -1,8 +1,8 @@
-const { Schema } = require('mongoose')
+const mongoose = require('mongoose')
 
-module.exports = new Schema({
+const Itinerary = new mongoose.Schema({
   tour_id: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'tour',
     required: true,
   },
@@ -22,3 +22,5 @@ module.exports = new Schema({
     required: true,
   }
 })
+
+module.exports = mongoose.model('itinerary', Itinerary, 'itinerary')

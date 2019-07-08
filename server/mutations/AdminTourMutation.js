@@ -7,7 +7,9 @@ const {
 } = require('graphql')
 
 const Tour = require('../model/Tour')
+const Itinerary = require('../model/Itinerary')
 const TourCreateInput = require('../model/input/TourCreateInput')
+const ItineraryInput = require('../model/input/ItineraryInput')
 const TourWhatsIncludedInput = require('../model/input/TourWhatsIncludedInput')
 const TourBasicInfoInput = require('../model/input/TourBasicInfoInput')
 const TourKidPriceInput = require('../model/input/TourKidPriceInput')
@@ -20,7 +22,6 @@ const adminTourCancellationPolicyUpdate = require('../utils/mutation-resolvers/a
 const adminTourTermsAndConditionsUpdate = require('../utils/mutation-resolvers/adminTourTermsAndConditionsUpdate')
 const adminTourGuestRequirementsUpdate = require('../utils/mutation-resolvers/adminTourGuestRequirementsUpdate')
 const adminTourMoreTipsUpdate = require('../utils/mutation-resolvers/adminTourMoreTipsUpdate')
-const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourItineraryUpdate')
 const adminTourNextAvailableDateAdd = require('../utils/mutation-resolvers/adminTourNextAvailableDateAdd')
 const adminTourAvailableDateDelete = require('../utils/mutation-resolvers/adminTourAvailableDateDelete')
 const adminTourWhatsIncludedUpdate = require('../utils/mutation-resolvers/adminTourWhatsIncludedUpdate')
@@ -31,6 +32,7 @@ const adminTourPackagePriceUpdate = require('../utils/mutation-resolvers/adminTo
 const adminTourPackagePriceDelete = require('../utils/mutation-resolvers/adminTourPackagePriceDelete')
 const adminTourDescriptionUpdate = require('../utils/mutation-resolvers/adminTourDescriptionUpdate')
 const adminTourLocationUpdate = require('../utils/mutation-resolvers/adminTourLocationUpdate')
+const adminTourItineraryCreate = require('../utils/mutation-resolvers/adminTourItineraryCreate')
 
 module.exports = {
   tour_create: {
@@ -122,21 +124,6 @@ module.exports = {
     resolve: adminTourAvailableDateDelete
   },
 
-  tour_itinerary_update: {
-    type: Tour,
-    args: {
-      _id: { type: new GraphQLNonNull(GraphQLString) },
-      itinerary: { 
-        type: new GraphQLNonNull(new GraphQLList(
-          new GraphQLNonNull(new GraphQLList(
-            GraphQLString
-          ))
-        )) 
-      }
-    },
-    resolve: adminTourItineraryUpdate
-  },
-
   tour_whats_included_update: {
     type: Tour,
     args: {
@@ -197,5 +184,14 @@ module.exports = {
       location_details: { type: GraphQLString },
     },
     resolve: adminTourLocationUpdate
+  },
+
+  tour_itinerary_create: {
+    type: Itinerary,
+    args: {
+      tour_id: { type: new GraphQLNonNull(GraphQLString) },
+      input: { type: new GraphQLNonNull(ItineraryInput) }
+    },
+    resolve: adminTourItineraryCreate
   }
 }
