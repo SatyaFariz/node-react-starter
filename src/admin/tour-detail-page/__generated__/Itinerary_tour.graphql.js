@@ -8,6 +8,7 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
+type ItineraryCreateForm_tour$ref = any;
 type ItineraryItem_itinerary$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Itinerary_tour$ref: FragmentReference;
@@ -18,6 +19,7 @@ export type Itinerary_tour = {|
     +id: ?string,
     +$fragmentRefs: ItineraryItem_itinerary$ref,
   |}>,
+  +$fragmentRefs: ItineraryCreateForm_tour$ref,
   +$refType: Itinerary_tour$ref,
 |};
 export type Itinerary_tour$data = Itinerary_tour;
@@ -60,10 +62,15 @@ return {
           "args": null
         }
       ]
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "ItineraryCreateForm_tour",
+      "args": null
     }
   ]
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0c053bbea0140597f96ebca3d93b548e';
+(node/*: any*/).hash = '36bd59492f3c60d8aca5d1536d925662';
 module.exports = node;

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@material-ui/core/TextField'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
+import ItineraryCreate from '../../mutations/admin/TourItineraryCreate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -60,15 +62,18 @@ const Component = props => {
   }
 
   const save = () => {
-  /*  const validation = validate()
+    const validation = validate()
+
     if(validation) {
+      const { tour } = props
       const variables = {
-        input
+        input,
+        tour_id: tour.id
       }
 
       ItineraryCreate(props.relay.environment, variables)
       props.closeEdit()
-    }*/ validate()
+    }
   }
 
   return (
@@ -111,4 +116,10 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment ItineraryCreateForm_tour on Tour {
+      id
+    }
+  `
+})

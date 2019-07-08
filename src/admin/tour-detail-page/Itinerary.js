@@ -21,6 +21,8 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { tour } = props
+
   const [isEditing, setEditing] = useState(false)
   const [editButtonVisible, setEditButtonVisible] = useState(false)
 
@@ -37,7 +39,7 @@ const Component = props => {
 
   const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
 
-  const itinerary = props.tour.itinerary || []
+  const itinerary = tour.itinerary || []
 
   return (
     <div 
@@ -61,7 +63,7 @@ const Component = props => {
           })}
          
           {isEditing &&
-            <ItineraryCreateForm closeEdit={closeEdit}/>
+            <ItineraryCreateForm closeEdit={closeEdit} tour={tour}/>
           }
         </ul>
       </div>
@@ -73,6 +75,7 @@ export default createFragmentContainer(Component, {
   tour: graphql`
     fragment Itinerary_tour on Tour {
       id,
+      ...ItineraryCreateForm_tour,
       itinerary {
         id,
         ...ItineraryItem_itinerary
