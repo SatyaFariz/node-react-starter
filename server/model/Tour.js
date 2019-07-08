@@ -13,6 +13,8 @@ const TourPackagePrice = require('./TourPackagePrice')
 const Coordinate = require('./Coordinate')
 const Itinerary = require('./Itinerary')
 
+const itineraryLoader = require('../dataloader/itineraryLoader')
+
 module.exports = new GraphQLObjectType({
   name: 'Tour',
   fields: () => ({
@@ -136,7 +138,8 @@ module.exports = new GraphQLObjectType({
     },
 
     itinerary: {
-      type: new GraphQLList(Itinerary)
+      type: new GraphQLList(Itinerary),
+      resolve: async root => await itineraryLoader.load(root._id)
     },
 
     photos: {
