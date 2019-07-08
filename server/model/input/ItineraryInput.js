@@ -5,7 +5,7 @@ const {
 } = require('graphql')
 
 module.exports = new GraphQLInputObjectType({
-  name: 'ItineraryCreateInput',
+  name: 'ItineraryInput',
   fields: () => ({
     time_description: {
       type: new GraphQLNonNull(GraphQLString)
