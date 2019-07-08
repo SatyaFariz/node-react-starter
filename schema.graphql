@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Sun Jul 07 2019 02:28:31 GMT+0700 (SE Asia Standard Time)
+# timestamp: Mon Jul 08 2019 16:19:15 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -30,7 +30,6 @@ type AdminMutation {
   tour_more_tips_update(_id: String!, more_tips: [String]!): Tour
   tour_next_available_date_add(_id: String!, date: Int!): Tour
   tour_available_date_delete(_id: String!, date: Int!): Tour
-  tour_itinerary_update(_id: String!, itinerary: [[String]!]!): Tour
   tour_whats_included_update(_id: String!, whats_included: TourWhatsIncludedInput!): Tour
   tour_basic_info_update(_id: String!, basic_info: TourBasicInfoInput!): Tour
   tour_kid_price_update(_id: String!, kid_price: TourKidPriceInput!): Tour
@@ -38,6 +37,9 @@ type AdminMutation {
   tour_package_price_update(_id: String!, package_price: TourPackagePriceInput!): Tour
   tour_package_price_delete(_id: String!): Tour
   tour_location_update(_id: String!, location: CoordinateInput!, location_details: String): Tour
+  tour_itinerary_create(tour_id: String!, input: ItineraryCreateInput!): Itinerary
+  tour_itinerary_update(_id: String!, input: ItineraryCreateInput!): Itinerary
+  tour_itinerary_delete(_id: String!): DeletePayload
 }
 
 type Coordinate {
@@ -48,6 +50,10 @@ type Coordinate {
 input CoordinateInput {
   lat: Float!
   lng: Float!
+}
+
+type DeletePayload {
+  deleted_id: String
 }
 
 """
@@ -66,6 +72,19 @@ type Image {
   is_spherical: Boolean
   spherical_url: String
   spherical_secure_url: String
+}
+
+type Itinerary {
+  id: String
+  time_description: String
+  activity_title: String
+  activity_description: String
+}
+
+input ItineraryCreateInput {
+  time_description: String!
+  activity_title: String!
+  activity_description: String!
 }
 
 type LoggedAdmin {
@@ -123,6 +142,7 @@ type SignUpPayload {
 type Tour {
   id: String
   tourID: String
+  tour_id: String
   province: String
   city: String
   display_location: String
@@ -149,7 +169,7 @@ type Tour {
   cancellation_policy: [String]
   guest_requirements: [String]
   more_tips: [String]
-  itinerary: [[String]]
+  itinerary: [Itinerary]
   photos: [Image]
   published: Boolean
 }
