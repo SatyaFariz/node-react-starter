@@ -18,7 +18,7 @@ export default (environment, variables, callback) => {
     admin: {
       tour_itinerary_update: {
         id: variables._id,
-        ...variables
+        ...variables.input
       }
     }
   }

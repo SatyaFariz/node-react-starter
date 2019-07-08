@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@material-ui/core/TextField'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
+import ItineraryUpdate from '../../mutations/admin/TourItineraryUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -56,7 +57,16 @@ const Component = props => {
   }
 
   const save = () => {
-    validate()
+    const validation = validate()
+    if(validation) {
+      const variables = {
+        _id: itinerary.id,
+        input
+      }
+
+      ItineraryUpdate(props.relay.environment, variables)
+      props.closeEdit()
+    }
   }
 
   return (
