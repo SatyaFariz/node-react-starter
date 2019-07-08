@@ -6,6 +6,7 @@ const {
   GraphQLBoolean
 } = require('graphql')
 
+const DeletePayload = require('../model/payload/DeletePayload')
 const Tour = require('../model/Tour')
 const Itinerary = require('../model/Itinerary')
 const TourCreateInput = require('../model/input/TourCreateInput')
@@ -34,6 +35,7 @@ const adminTourDescriptionUpdate = require('../utils/mutation-resolvers/adminTou
 const adminTourLocationUpdate = require('../utils/mutation-resolvers/adminTourLocationUpdate')
 const adminTourItineraryCreate = require('../utils/mutation-resolvers/adminTourItineraryCreate')
 const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourItineraryUpdate')
+const adminTourItineraryDelete = require('../utils/mutation-resolvers/adminTourItineraryDelete')
 
 module.exports = {
   tour_create: {
@@ -203,5 +205,13 @@ module.exports = {
       input: { type: new GraphQLNonNull(ItineraryInput) }
     },
     resolve: adminTourItineraryUpdate
+  },
+
+  tour_itinerary_delete: {
+    type: DeletePayload,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    resolve: adminTourItineraryDelete
   }
 }
