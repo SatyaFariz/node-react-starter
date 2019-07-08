@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import ItineraryItemEdit from './ItineraryItemEdit'
+import ItineraryDelete from '../../mutations/admin/TourItineraryDelete'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -53,7 +54,17 @@ const Component = props => {
     setEditButtonVisible(false)
   }
 
-  const { itinerary } = props
+  const { itinerary, relay: { environment }} = props
+
+  const _delete = () => {
+    const variables = {
+      _id: itinerary.id
+    }
+
+    const { tour_id } = itinerary
+
+    ItineraryDelete(environment, variables, { tour_id })
+  }
 
   if(isEditing) {
     return (
@@ -82,7 +93,7 @@ const Component = props => {
 
           {deleteButtonVisible &&
           <IconButton
-            onClick={() => console.log('')}
+            onClick={_delete}
             className={c.deleteButton}
           >
             <DeleteIcon fontSize="small"/>
@@ -104,6 +115,7 @@ export default createFragmentContainer(Component, {
   itinerary: graphql`
     fragment ItineraryItem_itinerary on Itinerary {
       id,
+      tour_id,
       time_description,
       activity_title,
       activity_description,

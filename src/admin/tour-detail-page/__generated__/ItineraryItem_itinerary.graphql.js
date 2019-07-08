@@ -14,6 +14,7 @@ declare export opaque type ItineraryItem_itinerary$ref: FragmentReference;
 declare export opaque type ItineraryItem_itinerary$fragmentType: ItineraryItem_itinerary$ref;
 export type ItineraryItem_itinerary = {|
   +id: ?string,
+  +tour_id: ?string,
   +time_description: ?string,
   +activity_title: ?string,
   +activity_description: ?string,
@@ -39,6 +40,13 @@ const node/*: ReaderFragment*/ = {
       "kind": "ScalarField",
       "alias": null,
       "name": "id",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "tour_id",
       "args": null,
       "storageKey": null
     },
@@ -71,5 +79,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '5875430190eead3a8d2ec5fcae02b0c3';
+(node/*: any*/).hash = '952fa6a1c562a7884b3a6366649a15f9';
 module.exports = node;
