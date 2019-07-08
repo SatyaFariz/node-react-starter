@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
   list: {
     display: 'grid',
     gridGap: '10px',
-    margin: 0
+    margin: 0,
+    listStyle: 'none'
   }
 }))
 
