@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import FormActionButtons from './FormActionButtons'
@@ -12,6 +12,13 @@ const useStyles = makeStyles(theme => ({
 
 const Component = props => {
   const c = useStyles()
+
+  const formRef = useRef(null)
+
+  useEffect(() => {
+    // code to run on component mount
+    formRef.current.scrollIntoView({ behavior: "smooth" })
+  }, [])
 
   const [input, setInput] = useState({
     time_description: '',
@@ -65,7 +72,7 @@ const Component = props => {
   }
 
   return (
-    <div className={c.container}>
+    <div className={c.container} ref={formRef}>
       <TextField
         label="Time Description"
         defaultValue={input.time_description}
