@@ -11,6 +11,7 @@ const Image = require('./Image')
 const TourKidPrice = require('./TourKidPrice')
 const TourPackagePrice = require('./TourPackagePrice')
 const Coordinate = require('./Coordinate')
+const Itinerary = require('./Itinerary')
 
 module.exports = new GraphQLObjectType({
   name: 'Tour',
@@ -130,7 +131,7 @@ module.exports = new GraphQLObjectType({
     },
 
     itinerary: {
-      type: new GraphQLList(new GraphQLList(GraphQLString))
+      type: new GraphQLList(Itinerary)
     },
 
     photos: {
