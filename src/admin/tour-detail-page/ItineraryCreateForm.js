@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@material-ui/core/TextField'
 import FormActionButtons from './FormActionButtons'
 import Validator from '../../utils/validator'
-import ItineraryUpdate from '../../mutations/admin/TourItineraryUpdate'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -15,12 +13,10 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
-  const { itinerary } = props
-
   const [input, setInput] = useState({
-    time_description: itinerary.time_description || '',
-    activity_title: itinerary.activity_title || '',
-    activity_description: itinerary.activity_description || '',
+    time_description: '',
+    activity_title: '',
+    activity_description: '',
   })
 
   const [validation, setValidation] = useState({ isValid: false })
@@ -57,16 +53,15 @@ const Component = props => {
   }
 
   const save = () => {
-    const validation = validate()
+  /*  const validation = validate()
     if(validation) {
       const variables = {
-        _id: itinerary.id,
         input
       }
 
-      ItineraryUpdate(props.relay.environment, variables)
+      ItineraryCreate(props.relay.environment, variables)
       props.closeEdit()
-    }
+    }*/ validate()
   }
 
   return (
@@ -109,13 +104,4 @@ const Component = props => {
   )
 }
 
-export default createFragmentContainer(Component, {
-  itinerary: graphql`
-    fragment ItineraryItemEdit_itinerary on Itinerary {
-      id,
-      time_description,
-      activity_title,
-      activity_description
-    }
-  `
-})
+export default Component

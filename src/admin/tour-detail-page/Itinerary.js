@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { graphql, createFragmentContainer } from 'react-relay'
-import Typography from '@material-ui/core/Typography'
-
+import ItineraryCreateForm from './ItineraryCreateForm'
+import SectionHeader from './SectionHeader'
 import ItineraryItem from './ItineraryItem'
 
 const useStyles = makeStyles(theme => ({
@@ -21,13 +21,35 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const [isEditing, setEditing] = useState(false)
+  const [editButtonVisible, setEditButtonVisible] = useState(false)
+
+  const closeEdit = () => {
+    setEditing(false)
+  }
+
+  const openEdit = () => {
+    setEditButtonVisible(false)
+    setEditing(true)
+  }
+
+  const showEditButton = () => !isEditing && !editButtonVisible && setEditButtonVisible(true)
+
+  const hideEditButton = () => !isEditing && editButtonVisible && setEditButtonVisible(false)
+
   const itinerary = props.tour.itinerary || []
 
   return (
-    <div className={c.container}>
-      <Typography variant="h4" gutterBottom className={c.title}>
-        Itinerary
-      </Typography>
+    <div 
+      className={c.container}
+      onMouseOver={showEditButton}
+      onMouseLeave={hideEditButton}
+    >
+      <SectionHeader 
+        title="Itinerary"
+        showEditButton={editButtonVisible}
+        onEditButtonClick={openEdit}
+      />
       <div>
         <ul className={c.list}>
           {itinerary.map((item, i) => {
@@ -38,6 +60,9 @@ const Component = props => {
             )
           })}
          
+          {isEditing &&
+            <ItineraryCreateForm closeEdit={closeEdit}/>
+          }
         </ul>
       </div>
     </div>
