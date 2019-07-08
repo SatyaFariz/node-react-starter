@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'flex-end'
   },
-  cancelButton: {
+  withMargin: {
     marginLeft: theme.spacing(1)
   }
 }))
@@ -25,10 +25,20 @@ const Component = props => {
         Save
       </Button>
 
+      {props.showSaveAndCreateAgainButton && 
+      <Button
+        className={c.withMargin}
+        onClick={props.onSaveAndCreateAgainButtonClick}
+        variant="outlined"
+      >
+        {props.saveAndCreateAgainButtonText || 'Save and Create Again'}
+      </Button>
+      }
+
       <Button
         variant="outlined"
         onClick={props.onCancelButtonClick}
-        className={c.cancelButton}
+        className={c.withMargin}
       >
         Cancel
       </Button>

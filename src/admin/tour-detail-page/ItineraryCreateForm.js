@@ -17,16 +17,20 @@ const Component = props => {
 
   const formRef = useRef(null)
 
+  const scrollIntoView = () => formRef.current.scrollIntoView({ behavior: "smooth" })
+
   useEffect(() => {
     // code to run on component mount
-    formRef.current.scrollIntoView({ behavior: "smooth" })
+    scrollIntoView()
   }, [])
 
-  const [input, setInput] = useState({
+  const defaultValues = {
     time_description: '',
     activity_title: '',
-    activity_description: '',
-  })
+    activity_description: ''
+  }
+
+  const [input, setInput] = useState(defaultValues)
 
   const [validation, setValidation] = useState({ isValid: false })
 
@@ -61,7 +65,7 @@ const Component = props => {
     return validation
   }
 
-  const save = () => {
+  const create = (again) => {
     const validation = validate()
 
     if(validation) {
@@ -72,15 +76,24 @@ const Component = props => {
       }
 
       ItineraryCreate(props.relay.environment, variables)
-      props.closeEdit()
+      if(again) {
+        setInput(defaultValues)
+        scrollIntoView()
+      } else {
+        props.closeEdit()
+      }      
     }
   }
+
+  const save = () => create(false)
+
+  const saveAndCreateAgain = () => create(true)
 
   return (
     <div className={c.container} ref={formRef}>
       <TextField
         label="Time Description"
-        defaultValue={input.time_description}
+        value={input.time_description}
         onChange={handleChange('time_description')}
         margin="normal"
         fullWidth
@@ -90,7 +103,7 @@ const Component = props => {
 
       <TextField
         label="Activity Title"
-        defaultValue={input.activity_title}
+        value={input.activity_title}
         onChange={handleChange('activity_title')}
         margin="normal"
         fullWidth
@@ -100,7 +113,7 @@ const Component = props => {
 
       <TextField
         label="Activity Description"
-        defaultValue={input.activity_description}
+        value={input.activity_description}
         onChange={handleChange('activity_description')}
         margin="normal"
         fullWidth
@@ -111,6 +124,8 @@ const Component = props => {
       <FormActionButtons
         onSaveButtonClick={save}
         onCancelButtonClick={props.closeEdit}
+        onSaveAndCreateAgainButtonClick={saveAndCreateAgain}
+        showSaveAndCreateAgainButton
       />
     </div>
   )
