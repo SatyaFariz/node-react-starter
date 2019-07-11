@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import ItineraryCreateForm from './ItineraryCreateForm'
 import SectionHeader from './SectionHeader'
 import ItineraryItem from './ItineraryItem'
+import NoDataComponent from './NoDataComponent'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -53,6 +54,7 @@ const Component = props => {
         onEditButtonClick={openEdit}
       />
       <div>
+        {itinerary.length > 0 ?
         <ul className={c.list}>
           {itinerary.map((item, i) => {
             return (
@@ -66,6 +68,15 @@ const Component = props => {
             <ItineraryCreateForm closeEdit={closeEdit} tour={tour}/>
           }
         </ul>
+        :
+          <React.Fragment>
+            {isEditing ?
+            <ItineraryCreateForm closeEdit={closeEdit} tour={tour}/>
+            :
+            <NoDataComponent onAddButtonClick={openEdit}/>
+            }
+          </React.Fragment>
+        }
       </div>
     </div>
   )
