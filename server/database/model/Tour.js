@@ -151,7 +151,11 @@ const Tour = new Schema({
     type: [[String]]
   },
 
-  photos: {
+  display_image: {
+    type: Image
+  },
+
+  images: {
     type: [Image],
     default: []
   },
