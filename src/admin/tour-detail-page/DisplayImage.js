@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useDropzone } from 'react-dropzone'
+import { graphql, createFragmentContainer } from 'react-relay'
 
 const dropzoneWidth = 500
 
@@ -77,4 +78,14 @@ const Component = props => {
   )
 }
 
-export default Component
+export default createFragmentContainer(Component, {
+  tour: graphql`
+    fragment DisplayImage_tour on Tour {
+      id,
+      display_image {
+        id,
+        secure_url
+      }
+    }
+  `
+})

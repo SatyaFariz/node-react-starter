@@ -142,7 +142,11 @@ module.exports = new GraphQLObjectType({
       resolve: async root => await itineraryLoader.load(root._id)
     },
 
-    photos: {
+    display_image: {
+      type: Image
+    },
+
+    images: {
       type: new GraphQLList(Image)
     },
 

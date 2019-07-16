@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Mon Jul 08 2019 22:22:37 GMT+0700 (SE Asia Standard Time)
+# timestamp: Tue Jul 16 2019 23:52:36 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -40,6 +40,8 @@ type AdminMutation {
   tour_itinerary_create(tour_id: String!, input: ItineraryInput!): Itinerary
   tour_itinerary_update(_id: String!, input: ItineraryInput!): Itinerary
   tour_itinerary_delete(_id: String!): DeletePayload
+  tour_display_image_upload(_id: String!): Image
+  tour_image_upload(_id: String!): Image
 }
 
 type Coordinate {
@@ -171,7 +173,8 @@ type Tour {
   guest_requirements: [String]
   more_tips: [String]
   itinerary: [Itinerary]
-  photos: [Image]
+  display_image: Image
+  images: [Image]
   published: Boolean
 }
 

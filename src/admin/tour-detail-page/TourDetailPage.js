@@ -42,7 +42,7 @@ const Component = props => {
         Tour Detail
       </Typography>
 
-      <DisplayImage/>
+      <DisplayImage tour={tour}/>
 
       <div className={c.innerContainer}>
         <BasicInfo tour={tour}/>
@@ -66,6 +66,7 @@ export default createFragmentContainer(Component, {
   tour: graphql`
     fragment TourDetailPage_tour on Tour {
       id,
+      ...DisplayImage_tour,
       ...Description_tour,
       ...BasicInfo_tour,
       ...WhatsIncluded_tour,
