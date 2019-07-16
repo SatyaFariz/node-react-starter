@@ -15,6 +15,7 @@ import TermsAndConditions from './TermsAndConditions'
 import CancellationPolicy from './CancellationPolicy'
 import MapsAndLocationDetails from './MapsAndLocationDetails'
 import Itinerary from './Itinerary'
+import DisplayImage from './DisplayImage'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -40,6 +41,8 @@ const Component = props => {
       <Typography variant="h2" gutterBottom className={c.title}>
         Tour Detail
       </Typography>
+
+      <DisplayImage/>
 
       <div className={c.innerContainer}>
         <BasicInfo tour={tour}/>
