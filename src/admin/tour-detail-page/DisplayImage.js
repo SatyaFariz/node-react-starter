@@ -35,6 +35,11 @@ const useStyles = makeStyles(theme => ({
 
   dropzoneDisabled: {
     ...dropzoneStyle
+  },
+
+  image: {
+    width: '100%',
+    height: '100%'
   }
 }))
 
@@ -75,11 +80,21 @@ const Component = props => {
         <CircularProgress size={40}/>
       :
         <React.Fragment>
-        {
-          isDragActive ?
-            <Typography>Drop the files here...</Typography> :
-            <Typography>Upload here...</Typography>
-        }
+          {tour.display_image ?
+            <img 
+              className={c.image}
+              src={tour.display_image.secure_url} 
+              alt={tour.display_image.id}
+            />
+            :
+            <React.Fragment>
+            {
+              isDragActive ?
+                <Typography>Drop the files here...</Typography> :
+                <Typography>Upload here...</Typography>
+            }
+            </React.Fragment>
+          }
         </React.Fragment>
       }
     </div>
