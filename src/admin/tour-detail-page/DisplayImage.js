@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useDropzone } from 'react-dropzone'
 import { graphql, createFragmentContainer } from 'react-relay'
+import ImageUpload from '../../mutations/admin/TourDisplayImageUpload'
 
 const dropzoneWidth = 500
 
@@ -40,11 +41,18 @@ const useStyles = makeStyles(theme => ({
 const Component = props => {
   const c = useStyles()
 
+  const { tour, relay: { environment }} = props
+
   const [isLoading, setLoading] = useState(false)
 
   const onDropAccepted = useCallback(acceptedFiles => {
+    const file = acceptedFiles[0]
+    const variables = { _id: tour.id }
+
+    ImageUpload(environment, variables, file, () => {
+      setLoading(false)
+    })
     
-    setTimeout(() => setLoading(false), 3000)
     setLoading(true)
   }, [])
 
