@@ -42,5 +42,10 @@ module.exports = new Schema({
 
   spherical_secure_url: {
     type: String
+  },
+
+  created_at: {
+    type: Date,
+    default: Date.now
   }
-}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }})
+})

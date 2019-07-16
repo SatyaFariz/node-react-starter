@@ -8,6 +8,7 @@ const {
 
 const DeletePayload = require('../model/payload/DeletePayload')
 const Tour = require('../model/Tour')
+const Image = require('../model/Image')
 const Itinerary = require('../model/Itinerary')
 const TourCreateInput = require('../model/input/TourCreateInput')
 const ItineraryInput = require('../model/input/ItineraryInput')
@@ -36,6 +37,8 @@ const adminTourLocationUpdate = require('../utils/mutation-resolvers/adminTourLo
 const adminTourItineraryCreate = require('../utils/mutation-resolvers/adminTourItineraryCreate')
 const adminTourItineraryUpdate = require('../utils/mutation-resolvers/adminTourItineraryUpdate')
 const adminTourItineraryDelete = require('../utils/mutation-resolvers/adminTourItineraryDelete')
+const adminTourDisplayImageUpload = require('../utils/mutation-resolvers/adminTourDisplayImageUpload')
+const adminTourImageUpload = require('../utils/mutation-resolvers/adminTourImageUpload')
 
 module.exports = {
   tour_create: {
@@ -213,5 +216,21 @@ module.exports = {
       _id: { type: new GraphQLNonNull(GraphQLString) }
     },
     resolve: adminTourItineraryDelete
+  },
+
+  tour_display_image_upload: {
+    type: Image,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    resolve: adminTourDisplayImageUpload
+  },
+
+  tour_image_upload: {
+    type: Image,
+    args: {
+      _id: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    resolve: adminTourImageUpload
   }
 }
