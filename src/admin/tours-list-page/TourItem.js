@@ -12,6 +12,11 @@ const useStyles = makeStyles(theme => ({
   image: {
     width: 200,
     height: 200 * 0.6667
+  },
+
+  link: {
+    color: theme.colors.link,
+    textDecoration: 'none !important'
   }
 }))
 
@@ -22,14 +27,19 @@ const Component = props => {
 
   return (
     <div className={c.container}>
-      <Link href={`/admin/tours/${tour.id}`}>
+      <Link href={`/admin/tours/${tour.id}`} className={c.link}>
         <div>
           <img 
             className={c.image}
             src={tour.display_image ? tour.display_image.secure_url : NoImage}
             alt={tour.id}
           />
-          <Typography variant="body2">{tour.name}</Typography>
+          <Typography 
+            variant="body2"
+            className={c.link}
+          >
+            {tour.name}
+          </Typography>
         </div>
       </Link>
     </div>

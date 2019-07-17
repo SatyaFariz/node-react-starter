@@ -35,7 +35,7 @@ export default createMuiTheme({
     appContent: 24
   },
 
-  color: {
+  colors: {
     link: '#365899'
   },
 
