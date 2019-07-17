@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 79133de0f2f876b2706668b74f492ab2
+ * @relayHash 6116bfe371e8a4a86f841e9731f4f694
  */
 
 /* eslint-disable */
@@ -42,6 +42,7 @@ fragment ToursList_loggedAdmin_2HEEH6 on LoggedAdmin {
       cursor
       node {
         id
+        ...TourItem_tour
         __typename
       }
     }
@@ -49,6 +50,15 @@ fragment ToursList_loggedAdmin_2HEEH6 on LoggedAdmin {
       hasNextPage
       endCursor
     }
+  }
+}
+
+fragment TourItem_tour on Tour {
+  id
+  name
+  display_image {
+    id
+    secure_url
   }
 }
 */
@@ -79,7 +89,14 @@ v1 = [
     "name": "first",
     "variableName": "first"
   }
-];
+],
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
 return {
   "kind": "Request",
   "fragment": {
@@ -155,12 +172,32 @@ return {
                     "concreteType": "Tour",
                     "plural": false,
                     "selections": [
+                      (v2/*: any*/),
                       {
                         "kind": "ScalarField",
                         "alias": null,
-                        "name": "id",
+                        "name": "name",
                         "args": null,
                         "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "display_image",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "Image",
+                        "plural": false,
+                        "selections": [
+                          (v2/*: any*/),
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "secure_url",
+                            "args": null,
+                            "storageKey": null
+                          }
+                        ]
                       },
                       {
                         "kind": "ScalarField",
@@ -217,7 +254,7 @@ return {
     "operationKind": "query",
     "name": "ToursListQuery",
     "id": null,
-    "text": "query ToursListQuery(\n  $first: Int\n  $after: String\n) {\n  logged_admin {\n    ...ToursList_loggedAdmin_2HEEH6\n  }\n}\n\nfragment ToursList_loggedAdmin_2HEEH6 on LoggedAdmin {\n  tours(first: $first, after: $after) {\n    edges {\n      cursor\n      node {\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
+    "text": "query ToursListQuery(\n  $first: Int\n  $after: String\n) {\n  logged_admin {\n    ...ToursList_loggedAdmin_2HEEH6\n  }\n}\n\nfragment ToursList_loggedAdmin_2HEEH6 on LoggedAdmin {\n  tours(first: $first, after: $after) {\n    edges {\n      cursor\n      node {\n        id\n        ...TourItem_tour\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment TourItem_tour on Tour {\n  id\n  name\n  display_image {\n    id\n    secure_url\n  }\n}\n",
     "metadata": {}
   }
 };

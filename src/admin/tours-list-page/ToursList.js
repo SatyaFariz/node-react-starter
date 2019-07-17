@@ -1,8 +1,11 @@
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
 import { makeStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
 
-import Link from '../../common/Link'
+//import Link from '../../common/Link'
+import TourItem from './TourItem'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -16,15 +19,21 @@ const Component = props => {
 
   const { edges } = props.loggedAdmin.tours
   return (
-    <div className={c.container}>
+    <List className={c.container}>
       {edges.map(item => {
-        return (
+    /*    return (
           <div key={item.cursor}>
           <Link href={`/admin/tours/${item.node.id}`}>{item.cursor}</Link>
           </div>
+        )*/
+
+        return (
+          <ListItem key={item.cursor}>
+            <TourItem tour={item.node}/>
+          </ListItem>
         )
       })}
-    </div>
+    </List>
   )
 }
 
@@ -42,7 +51,8 @@ export default createPaginationContainer(Component, {
         edges {
           cursor,
           node {
-            id
+            id,
+            ...TourItem_tour
           }
         },
         pageInfo {

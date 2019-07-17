@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2fef5d3a1719bfa3d43763e1104a70f2
+ * @relayHash 6bcf36f9df8b3289ba10b94639b5f7fd
  */
 
 /* eslint-disable */
@@ -47,6 +47,7 @@ fragment ToursList_loggedAdmin on LoggedAdmin {
       cursor
       node {
         id
+        ...TourItem_tour
         __typename
       }
     }
@@ -54,6 +55,15 @@ fragment ToursList_loggedAdmin on LoggedAdmin {
       hasNextPage
       endCursor
     }
+  }
+}
+
+fragment TourItem_tour on Tour {
+  id
+  name
+  display_image {
+    id
+    secure_url
   }
 }
 */
@@ -158,6 +168,32 @@ return {
                       {
                         "kind": "ScalarField",
                         "alias": null,
+                        "name": "name",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "display_image",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "Image",
+                        "plural": false,
+                        "selections": [
+                          (v0/*: any*/),
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "secure_url",
+                            "args": null,
+                            "storageKey": null
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
                         "name": "__typename",
                         "args": null,
                         "storageKey": null
@@ -210,7 +246,7 @@ return {
     "operationKind": "query",
     "name": "toursListPageAdminQuery",
     "id": null,
-    "text": "query toursListPageAdminQuery {\n  logged_admin {\n    ...Layout_loggedAdmin\n    ...ToursListPage_loggedAdmin\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment ToursListPage_loggedAdmin on LoggedAdmin {\n  id\n  ...ToursList_loggedAdmin\n}\n\nfragment ToursList_loggedAdmin on LoggedAdmin {\n  tours(first: 12) {\n    edges {\n      cursor\n      node {\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
+    "text": "query toursListPageAdminQuery {\n  logged_admin {\n    ...Layout_loggedAdmin\n    ...ToursListPage_loggedAdmin\n  }\n}\n\nfragment Layout_loggedAdmin on LoggedAdmin {\n  id\n}\n\nfragment ToursListPage_loggedAdmin on LoggedAdmin {\n  id\n  ...ToursList_loggedAdmin\n}\n\nfragment ToursList_loggedAdmin on LoggedAdmin {\n  tours(first: 12) {\n    edges {\n      cursor\n      node {\n        id\n        ...TourItem_tour\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment TourItem_tour on Tour {\n  id\n  name\n  display_image {\n    id\n    secure_url\n  }\n}\n",
     "metadata": {}
   }
 };
