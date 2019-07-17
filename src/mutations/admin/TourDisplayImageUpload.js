@@ -11,6 +11,13 @@ const mutation = graphql`
   }
 `
 
+const update = (store, data, tourID) => {
+  const tour = store.get(tourID)
+  if(tour) {
+    tour.setLinkedRecord(data, 'display_image')
+  }
+}
+
 export default (environment, variables, file, callback) => {
   const uploadables = { file }
   commitMutation(
@@ -19,6 +26,11 @@ export default (environment, variables, file, callback) => {
       mutation,
       variables,
       uploadables,
+      updater: store => {
+        const payload = store.getRootField('admin')
+        const data = payload.getLinkedRecord('tour_display_image_upload', variables)
+        update(store, data, variables._id)
+      },
       onCompleted: (res, err) => {
         if(err)
           callback && callback(null, err)
